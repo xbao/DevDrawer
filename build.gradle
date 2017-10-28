@@ -1,0 +1,90 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext {
+        // Plugin versions
+        androidGradleVersion = "3.0.0"
+        errorProneGradleVersion = "0.0.13"
+        kotlinVersion = "1.1.51"
+        gradleVersionsVersion = "0.17.0"
+
+        // Project configuration
+        projectMinSdkVersion = 16
+        projectTargetSdkVersion = 26
+        projectCompileSdkVersion = 26
+
+        // Dependencies - Test
+        assertjVersion = "3.8.0"
+        junitVersion = "4.12"
+        mockitoVersion = "2.11.0"
+        robolectricVersion = "3.5"
+
+        // Dependencies - Runtime
+        androidArchitectureVersion = "1.0.0-rc1"
+        butterknifeVersion = "8.8.1"
+        daggerVersion = "2.12"
+        errorProneVersion = "2.1.2"
+        gsonVersion = "2.8.2"
+        guavaVersion = "23.3-android"
+        jsr305Version = "3.0.2"
+        kotlinLoggingVersion = "1.4.6"
+        multidexVersion = "1.0.2"
+        rxandroidVersion = "2.0.1"
+        rxjavaVersion = "2.1.6"
+        rxkotlinVersion = "2.1.0"
+        slf4jVersion = "1.7.24"
+        slf4jAndroidLoggerVersion = "1.0.5"
+        supportLibVersion = "26.1.0"
+    }
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$androidGradleVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "net.ltgt.gradle:gradle-errorprone-plugin:$errorProneGradleVersion"
+        classpath "com.github.ben-manes:gradle-versions-plugin:$gradleVersionsVersion"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    apply plugin: 'com.github.ben-manes.versions'
+    apply from: "${rootProject.projectDir}/gradle/versioning.gradle"
+
+    group "de.psdev.devdrawer"
+    version enhancedVersion(2, 0)
+
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+    }
+
+    project.ext {
+        // Project versions
+        gitHash = gitScmVersion()
+        appVersionName = project.version
+        appVersionCode = buildVersionCode()
+        buildTime = getBuildTime()
+    }
+
+    // Configure java compiler for error prone
+    tasks.withType(JavaCompile) {
+        options.compilerArgs += ['-XDallowBetterNullChecks=false',
+                                 '-XepDisableWarningsInGeneratedCode',
+                                 '-Xep:OvershadowingSubclassFields:ERROR',
+                                 '-Xep:MissingOverride:WARN',
+                                 '-Xep:JavaLangClash:ERROR',
+                                 '-XepDisableWarningsInGeneratedCode'
+        ]
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

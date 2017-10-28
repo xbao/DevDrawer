@@ -1,0 +1,131 @@
+apply plugin: 'com.android.application'
+//apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-kapt'
+apply plugin: 'net.ltgt.errorprone'
+
+android {
+    compileSdkVersion projectCompileSdkVersion
+
+    defaultConfig {
+        applicationId "de.psdev.devdrawer"
+        minSdkVersion projectMinSdkVersion
+        targetSdkVersion projectTargetSdkVersion
+        versionCode project.ext.appVersionCode
+        versionName project.ext.appVersionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+        // Version info
+        resValue "string", "app_version_code", "${project.ext.appVersionCode}"
+        resValue "string", "app_version_name", "${project.ext.appVersionName}"
+        resValue "string", "app_version", "${project.ext.appVersionName} (${project.ext.appVersionCode})"
+        resValue "string", "git_scm_hash", "${project.ext.gitHash}"
+        resValue "string", "build_time", "${project.ext.buildTime}"
+
+        buildConfigField 'String', 'BUILD_TIME', "\"${project.ext.buildTime}\""
+        buildConfigField 'String', 'GIT_SHA', "\"${project.ext.gitHash}\""
+
+        javaCompileOptions.annotationProcessorOptions.arguments["room.schemaLocation"] = rootProject.file('schemas').toString()
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            all { ignoreFailures = true }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    signingConfigs {
+        debug {
+        }
+        release {
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+            javaCompileOptions.annotationProcessorOptions.arguments['butterknife.debuggable'] = 'false'
+        }
+    }
+    packagingOptions {
+        exclude '**/LICENSE'
+        exclude '**/LICENSE.txt'
+        exclude '**/NOTICE'
+        exclude '**/NOTICE.txt'
+        exclude '**/rxjava.properties'
+        exclude '**/*.gwt.xml'
+    }
+}
+
+dependencies {
+    //
+    // Test dependencies
+    //
+    testImplementation "junit:junit:${junitVersion}"
+    testImplementation "org.robolectric:robolectric:${robolectricVersion}"
+    testImplementation "org.assertj:assertj-core:${assertjVersion}"
+    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    testImplementation "com.google.guava:guava:${guavaVersion}"
+    testImplementation "com.google.code.findbugs:jsr305:${jsr305Version}"
+    androidTestImplementation "com.android.support:multidex-instrumentation:${multidexVersion}"
+
+    //
+    // Runtime dependencies
+    //
+
+    // Support Library
+//    implementation "com.android.support:appcompat-v7:${supportLibVersion}"
+//    implementation "com.android.support:support-v4:${supportLibVersion}"
+//    implementation "com.android.support:recyclerview-v7:${supportLibVersion}"
+//    implementation "com.android.support:multidex:${multidexVersion}"
+
+    // Android Architecture Libraries
+//    implementation "android.arch.persistence.room:runtime:${androidArchitectureVersion}"
+//    implementation "android.arch.persistence.room:rxjava2:${androidArchitectureVersion}"
+//    kapt "android.arch.persistence.room:compiler:${androidArchitectureVersion}"
+
+    // ButterKnife
+//    implementation "com.jakewharton:butterknife:${butterknifeVersion}"
+//    kapt "com.jakewharton:butterknife-compiler:${butterknifeVersion}"
+
+    // Dagger
+//    implementation "com.google.dagger:dagger-android-support:${daggerVersion}"
+//    kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
+//    kapt "com.google.dagger:dagger-android-processor:${daggerVersion}"
+
+    // Gson
+    implementation "com.google.code.gson:gson:${gsonVersion}"
+
+    // Guava
+//    implementation "com.google.guava:guava:${guavaVersion}"
+
+    // JSR-305
+//    implementation "com.google.code.findbugs:jsr305:${jsr305Version}"
+
+    // Kotlin
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
+
+    // libsuperuser
+    implementation 'eu.chainfire:libsuperuser:1.0.0.201704021214'
+
+     Logging
+    implementation "de.psdev.slf4j-android-logger:slf4j-android-logger:${slf4jAndroidLoggerVersion}"
+//    implementation "io.github.microutils:kotlin-logging:${kotlinLoggingVersion}"
+
+    // RxJava
+//    implementation "io.reactivex.rxjava2:rxjava:${rxjavaVersion}"
+//    implementation "io.reactivex.rxjava2:rxandroid:${rxandroidVersion}"
+//    implementation "io.reactivex.rxjava2:rxkotlin:${rxkotlinVersion}"
+
+    // Error Prone
+    errorprone "com.google.errorprone:error_prone_core:${errorProneVersion}"
+}

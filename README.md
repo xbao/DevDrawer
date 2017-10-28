@@ -7,3 +7,7 @@ Root features such as one click uninstall, and clear cache added by [Ronald Amma
 This project needs a library dependency to [libsuperuser](https://github.com/Chainfire/libsuperuser).
 
 [Download DevDrawer in the Google Play Store](https://play.google.com/store/apps/details?id=com.owentech.DevDrawer).
+
+**About this fork**
+ 
+This fork upgrades to gradle and fixes issues with newer Android version (e.g. Adaptive Icons on Android O). It is currently based on the old version on the master branch. The develop is not maintained.

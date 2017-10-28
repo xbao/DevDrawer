@@ -1,0 +1,40 @@
+import java.text.SimpleDateFormat
+
+project.ext {
+    enhancedVersion = { final int versionMajor, final int versionMinor ->
+        // Git commit count
+        final gitHash = gitScmVersion()
+        final Integer gitVersion
+        try {
+            gitVersion = "git rev-list --first-parent --count HEAD".execute([], project.rootDir).text.trim().toInteger()
+        } catch (final e) {
+            gitVersion = 999
+        }
+        final boolean hasModifiedDeletedOrOtherFiles = !"git ls-files -mdo --exclude-standard".execute([], project.rootDir).text.trim().empty
+        final boolean hasStagedFiles = !"git diff-index --no-ext-diff --name-only --cached HEAD".execute([], project.rootDir).text.trim().empty
+        final boolean dirtyWorkingCopy = hasModifiedDeletedOrOtherFiles || hasStagedFiles
+        final gitDescription = dirtyWorkingCopy ? "${gitHash}-dirty" : gitHash
+        "${versionMajor}.${versionMinor}.${gitVersion}-${gitDescription}"
+    }
+    buildVersionCode = {
+        final def (String major, String minor, String patch) = project.version.toString().toLowerCase().tokenize('.')
+        patchVersion = patch.substring(0, patch.indexOf("-"))
+
+        (majorInt, minorInt, patchInt) = [major, minor, patchVersion].collect { it.toInteger() }
+
+        final def majorPart = (majorInt * 1000000)
+        final def minorPart = (minorInt * 1000)
+        majorPart + minorPart + patchInt
+    }
+    gitScmVersion = {
+        println "[$project.name] Generate scmVersion in $project.projectDir"
+        final def command = "git rev-parse --verify --short=7 HEAD"
+        final def process = command.execute([], project.projectDir)
+        process.text.trim()
+    }
+    getBuildTime = {
+        final dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'")
+        dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+        dateFormat.format(new Date())
+    }
+}
