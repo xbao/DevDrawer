@@ -1,4 +1,4 @@
-# DevDrawer
+# DevDrawer [![Build Status](https://travis-ci.org/hameno/DevDrawer.svg?branch=master)](https://travis-ci.org/hameno/DevDrawer)
 
 An Android application by [Tony Owen](https://plus.google.com/111365666249481367719) designed to help developers by automatically adding their apps to a widget for easy launching / uninstalling / reinstalling etc.
 
