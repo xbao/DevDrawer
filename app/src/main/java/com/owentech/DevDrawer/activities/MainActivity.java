@@ -1,5 +1,20 @@
 package com.owentech.DevDrawer.activities;
 
+import java.text.Collator;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import com.owentech.DevDrawer.R;
+import com.owentech.DevDrawer.adapters.FilterListAdapter;
+import com.owentech.DevDrawer.adapters.PartialMatchAdapter;
+import com.owentech.DevDrawer.appwidget.DDWidgetProvider;
+import com.owentech.DevDrawer.utils.AddAllAppsAsync;
+import com.owentech.DevDrawer.utils.Constants;
+import com.owentech.DevDrawer.utils.Database;
+
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
@@ -19,21 +34,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RemoteViews;
 import android.widget.Toast;
-
-import com.owentech.DevDrawer.R;
-import com.owentech.DevDrawer.adapters.FilterListAdapter;
-import com.owentech.DevDrawer.appwidget.DDWidgetProvider;
-import com.owentech.DevDrawer.adapters.PartialMatchAdapter;
-import com.owentech.DevDrawer.utils.AddAllAppsAsync;
-import com.owentech.DevDrawer.utils.Constants;
-import com.owentech.DevDrawer.utils.Database;
-
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class MainActivity extends Activity implements TextWatcher
 {
@@ -219,7 +219,7 @@ public class MainActivity extends Activity implements TextWatcher
 		intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "^DevDrawer");
 		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(context, R.drawable.shortcut_icon));
 		intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-		String shortcutUri = intent.toUri(MODE_WORLD_WRITEABLE);
+//		String shortcutUri = intent.toUri(MODE_WORLD_WRITEABLE);
 		context.sendBroadcast(intent);
 	}
 

@@ -1,11 +1,14 @@
 package com.owentech.DevDrawer.utils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
-import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -34,7 +37,7 @@ public class Database {
     public void connectDB()
     {
         db = ctx.openOrCreateDatabase("DevDrawer.db",
-                SQLiteDatabase.CREATE_IF_NECESSARY, null);
+                Context.MODE_PRIVATE, null);
     }
 
     ////////////////////////////////////////
