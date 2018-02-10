@@ -10,4 +10,5 @@ This project needs a library dependency to [libsuperuser](https://github.com/Cha
 
 **About this fork**
  
-This fork upgrades to gradle and fixes issues with newer Android version (e.g. Adaptive Icons on Android O). It is currently based on the old version on the master branch. The develop is not maintained.
+This fork upgrades to gradle and fixes issues with newer Android version (e.g. Adaptive Icons on Android O). It is currently based on the old version on the master branch.   
+**The develop branch is not maintained.**
