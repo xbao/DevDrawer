@@ -15,7 +15,8 @@ import de.psdev.devdrawer.database.DevDrawerDatabase
 import de.psdev.devdrawer.database.PackageFilter
 
 class FilterListAdapter(private val activity: Activity,
-                        private val devDrawerDatabase: DevDrawerDatabase): BaseAdapter() {
+                        private val devDrawerDatabase: DevDrawerDatabase,
+                        private val widgetId: Int): BaseAdapter() {
 
     private val filters = mutableListOf<PackageFilter>()
     private val layoutInflater = activity.layoutInflater
@@ -73,7 +74,7 @@ class FilterListAdapter(private val activity: Activity,
 
         // OnClick action for Edit Button
         holder.editImageButton.setOnClickListener {
-            val editDialogIntent = EditDialog.createStartIntent(activity, packageFilter.id, packageFilter.filter)
+            val editDialogIntent = EditDialog.createStartIntent(activity, packageFilter.id, packageFilter.filter, widgetId)
             activity.startActivityForResult(editDialogIntent, 0)
         }
     }

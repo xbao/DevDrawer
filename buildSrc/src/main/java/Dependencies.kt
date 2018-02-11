@@ -11,6 +11,7 @@ object Versions {
     const val androidSupportLib = "27.1.1"
     const val androidKotlinExtensions = "0.3"
     const val androidJob = "1.2.5"
+    const val constraintLayout = "1.0.2"
     const val kotlinLogging = "1.5.4"
     const val leakCanary = "1.5.4"
     const val multidexVersion = "1.0.3"
@@ -48,6 +49,7 @@ object Libs {
     // Android Support Library
     val support_appcompat_v7 = "com.android.support:appcompat-v7:${Versions.androidSupportLib}"
     val support_preference_v7 = "com.android.support:preference-v7:${Versions.androidSupportLib}"
+    val support_constraint_layout = "com.android.support.constraint:constraint-layout:${Versions.constraintLayout}"
 
     // Android Kotlin Extensions
     val android_ktx = "androidx.core:core-ktx:${Versions.androidKotlinExtensions}"

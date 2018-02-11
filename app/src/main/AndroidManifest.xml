@@ -15,7 +15,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
 
@@ -47,6 +46,12 @@
             android:noHistory="true"
             android:taskAffinity=""
             android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" />
+
+        <activity android:name=".activities.WidgetConfigActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
 
         <receiver android:name=".appwidget.DDWidgetProvider">
             <intent-filter>

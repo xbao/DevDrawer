@@ -18,14 +18,16 @@ class EditDialog: Activity(), TextWatcher {
 
     companion object: KLogging() {
         @JvmStatic
-        fun createStartIntent(context: Context, id: Int, filter: String) = Intent(context, EditDialog::class.java).apply {
+        fun createStartIntent(context: Context, id: Int, filter: String, widgetId: Int) = Intent(context, EditDialog::class.java).apply {
             putExtra("id", id)
             putExtra("text", filter)
+            putExtra("widgetId", widgetId)
         }
     }
 
     private val id: Int by lazy { intent.extras.getInt("id") }
     private val originalText: String by lazy { intent.extras.getString("text") }
+    private val widgetId: Int by lazy { intent.extras.getInt("widgetId") }
 
     private val appPackages: List<String> by lazy { packageManager.getExistingPackages() }
     private val devDrawerDatabase by lazy { (application as DevDrawerApplication).devDrawerDatabase }
@@ -51,6 +53,7 @@ class EditDialog: Activity(), TextWatcher {
             val intent = Intent().apply {
                 putExtra("id", id)
                 putExtra("newText", editDialogEditText.text.toString())
+                putExtra("widgetId", widgetId)
             }
             setResult(Constants.EDIT_DIALOG_CHANGE, intent)
             finish()

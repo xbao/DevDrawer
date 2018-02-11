@@ -12,6 +12,12 @@ abstract class PackageFilterDao {
     @Query("SELECT * FROM filters")
     abstract fun filters(): Flowable<List<PackageFilter>>
 
+    @Query("SELECT * FROM filters WHERE widgetId=:widgetId")
+    abstract fun filtersForWidget(widgetId: Int): Flowable<List<PackageFilter>>
+
+    @Query("DELETE FROM filters WHERE widgetId=:widgetId")
+    abstract fun deleteFiltersForWidget(widgetId: Int): Int
+
     @Insert
     abstract fun addFilter(vararg filters: PackageFilter)
 
@@ -25,8 +31,8 @@ abstract class PackageFilterDao {
 
     fun deleteAsync(filter: PackageFilter): Completable = Completable.fromAction { delete(filter) }.subscribeOn(Schedulers.io())
 
-    fun updateFilter(id: Int, newFilter: String): Disposable {
-        return Completable.fromAction { update(PackageFilter(id, newFilter)) }.subscribeOn(Schedulers.io()).subscribe()
+    fun updateFilter(id: Int, newFilter: String, widgetId: Int): Disposable {
+        return Completable.fromAction { update(PackageFilter(id, newFilter, widgetId)) }.subscribeOn(Schedulers.io()).subscribe()
     }
 
 }

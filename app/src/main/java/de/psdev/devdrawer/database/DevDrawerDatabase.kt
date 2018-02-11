@@ -3,7 +3,7 @@ package de.psdev.devdrawer.database
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 
-@Database(entities = [PackageFilter::class], version = DevDrawerDatabase.VERSION)
+@Database(entities = [PackageFilter::class, WidgetConfig::class], version = DevDrawerDatabase.VERSION)
 abstract class DevDrawerDatabase: RoomDatabase() {
 
     companion object {
@@ -13,4 +13,5 @@ abstract class DevDrawerDatabase: RoomDatabase() {
 
     abstract fun packageFilterDao(): PackageFilterDao
 
+    abstract fun widgetConfigDao(): WidgetConfigDao
 }

@@ -7,8 +7,9 @@ object Constants {
     @JvmField
     var EDIT_DIALOG_CANCEL = 2
 
+    const val ACTION_EDIT_FILTER = "de.psdev.devdrawer.EDIT_FILTER:"
+
     const val LAUNCH_APP = 1
     const val LAUNCH_APP_DETAILS = 2
     const val LAUNCH_UNINSTALL = 3
-
 }

@@ -108,7 +108,7 @@ class DDWidgetViewsFactory(private val context: Context, intent: Intent): Remote
     override fun hasStableIds(): Boolean = true
 
     // ==========================================================================================================================
-    // Private APi
+    // Private API
     // ==========================================================================================================================
 
     /**
@@ -120,7 +120,7 @@ class DDWidgetViewsFactory(private val context: Context, intent: Intent): Remote
         val devDrawerDatabase = application.devDrawerDatabase
 
         val packageFilters = devDrawerDatabase.packageFilterDao()
-            .filters()
+            .filtersForWidget(appWidgetId)
             .blockingFirst(emptyList())
             .map { it.filter.replace("*", ".*").toRegex() }
 
