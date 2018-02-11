@@ -1,4 +1,4 @@
-package com.owentech.devdrawer.adapters
+package de.psdev.devdrawer.adapters
 
 import android.app.Activity
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import com.owentech.devdrawer.R
+import de.psdev.devdrawer.R
 
 class ActivityListAdapter(activity: Activity, private val activityList: List<String>): BaseAdapter() {
 

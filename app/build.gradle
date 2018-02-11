@@ -46,7 +46,6 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
-            javaCompileOptions.annotationProcessorOptions.arguments['butterknife.debuggable'] = 'false'
         }
     }
     packagingOptions {

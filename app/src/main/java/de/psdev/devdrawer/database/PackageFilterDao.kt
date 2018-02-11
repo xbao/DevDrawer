@@ -1,4 +1,4 @@
-package com.owentech.devdrawer.database
+package de.psdev.devdrawer.database
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Delete

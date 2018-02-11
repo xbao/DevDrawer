@@ -1,4 +1,4 @@
-package com.owentech.devdrawer.activities
+package de.psdev.devdrawer.activities
 
 import android.app.Activity
 import android.appwidget.AppWidgetManager
@@ -11,16 +11,16 @@ import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import com.owentech.devdrawer.DevDrawerApplication
-import com.owentech.devdrawer.R
-import com.owentech.devdrawer.adapters.FilterListAdapter
-import com.owentech.devdrawer.adapters.PartialMatchAdapter
-import com.owentech.devdrawer.appwidget.DDWidgetProvider
-import com.owentech.devdrawer.database.PackageFilter
-import com.owentech.devdrawer.database.PackageFilterDao
-import com.owentech.devdrawer.utils.Constants
-import com.owentech.devdrawer.utils.consume
-import com.owentech.devdrawer.utils.getExistingPackages
+import de.psdev.devdrawer.DevDrawerApplication
+import de.psdev.devdrawer.R
+import de.psdev.devdrawer.adapters.FilterListAdapter
+import de.psdev.devdrawer.adapters.PartialMatchAdapter
+import de.psdev.devdrawer.appwidget.DDWidgetProvider
+import de.psdev.devdrawer.database.PackageFilter
+import de.psdev.devdrawer.database.PackageFilterDao
+import de.psdev.devdrawer.utils.Constants
+import de.psdev.devdrawer.utils.consume
+import de.psdev.devdrawer.utils.getExistingPackages
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign

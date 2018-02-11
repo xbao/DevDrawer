@@ -1,9 +1,9 @@
-package com.owentech.devdrawer.receivers
+package de.psdev.devdrawer.receivers
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.owentech.devdrawer.utils.Constants
+import de.psdev.devdrawer.utils.Constants
 
 class AppUninstalledReceiver: BroadcastReceiver() {
 

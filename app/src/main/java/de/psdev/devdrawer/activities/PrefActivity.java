@@ -1,8 +1,4 @@
-package com.owentech.devdrawer.activities;
-
-import com.owentech.devdrawer.R;
-import com.owentech.devdrawer.appwidget.DDWidgetProvider;
-import com.owentech.devdrawer.utils.Constants;
+package de.psdev.devdrawer.activities;
 
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -12,6 +8,9 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.widget.Toast;
+import de.psdev.devdrawer.R;
+import de.psdev.devdrawer.appwidget.DDWidgetProvider;
+import de.psdev.devdrawer.utils.Constants;
 
 public class PrefActivity extends PreferenceActivity {
     SharedPreferences sp;

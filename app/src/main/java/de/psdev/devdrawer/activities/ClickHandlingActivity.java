@@ -1,8 +1,4 @@
-package com.owentech.devdrawer.activities;
-
-import com.owentech.devdrawer.R;
-import com.owentech.devdrawer.appwidget.DDWidgetProvider;
-import com.owentech.devdrawer.utils.Constants;
+package de.psdev.devdrawer.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,6 +15,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
+import de.psdev.devdrawer.R;
+import de.psdev.devdrawer.appwidget.DDWidgetProvider;
+import de.psdev.devdrawer.utils.Constants;
 
 public class ClickHandlingActivity extends AppCompatActivity {
     SharedPreferences sp;

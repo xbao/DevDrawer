@@ -1,4 +1,4 @@
-package com.owentech.devdrawer.adapters
+package de.psdev.devdrawer.adapters
 
 import android.app.Activity
 import android.appwidget.AppWidgetManager
@@ -10,11 +10,11 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageButton
 import android.widget.TextView
-import com.owentech.devdrawer.R
-import com.owentech.devdrawer.activities.EditDialog
-import com.owentech.devdrawer.appwidget.DDWidgetProvider
-import com.owentech.devdrawer.database.DevDrawerDatabase
-import com.owentech.devdrawer.database.PackageFilter
+import de.psdev.devdrawer.R
+import de.psdev.devdrawer.activities.EditDialog
+import de.psdev.devdrawer.appwidget.DDWidgetProvider
+import de.psdev.devdrawer.database.DevDrawerDatabase
+import de.psdev.devdrawer.database.PackageFilter
 
 class FilterListAdapter(private val activity: Activity,
                         private val devDrawerDatabase: DevDrawerDatabase): BaseAdapter() {

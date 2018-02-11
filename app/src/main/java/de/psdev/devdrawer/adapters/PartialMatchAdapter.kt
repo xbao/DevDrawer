@@ -1,4 +1,4 @@
-package com.owentech.devdrawer.adapters
+package de.psdev.devdrawer.adapters
 
 import android.app.Activity
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import android.widget.BaseAdapter
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
-import com.owentech.devdrawer.R
-import com.owentech.devdrawer.database.DevDrawerDatabase
+import de.psdev.devdrawer.R
+import de.psdev.devdrawer.database.DevDrawerDatabase
 
 class PartialMatchAdapter(activity: Activity,
                           private val items: List<String>,

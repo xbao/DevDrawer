@@ -1,4 +1,4 @@
-package com.owentech.devdrawer.appwidget
+package de.psdev.devdrawer.appwidget
 
 import android.content.Intent
 import android.widget.RemoteViewsService

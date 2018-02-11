@@ -1,4 +1,4 @@
-package com.owentech.devdrawer.utils
+package de.psdev.devdrawer.utils
 
 inline fun consume(block: () -> Unit): Boolean {
     block()

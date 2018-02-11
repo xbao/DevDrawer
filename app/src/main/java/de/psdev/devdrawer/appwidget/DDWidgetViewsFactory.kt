@@ -1,4 +1,4 @@
-package com.owentech.devdrawer.appwidget
+package de.psdev.devdrawer.appwidget
 
 import android.appwidget.AppWidgetManager
 import android.content.*
@@ -13,9 +13,9 @@ import android.preference.PreferenceManager
 import android.support.v4.content.ContextCompat
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
-import com.owentech.devdrawer.DevDrawerApplication
-import com.owentech.devdrawer.R
-import com.owentech.devdrawer.utils.Constants
+import de.psdev.devdrawer.DevDrawerApplication
+import de.psdev.devdrawer.R
+import de.psdev.devdrawer.utils.Constants
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign

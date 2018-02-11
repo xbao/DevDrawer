@@ -1,4 +1,4 @@
-package com.owentech.devdrawer.appwidget
+package de.psdev.devdrawer.appwidget
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -8,10 +8,10 @@ import android.content.Intent
 import android.net.Uri
 import android.preference.PreferenceManager
 import android.widget.RemoteViews
-import com.owentech.devdrawer.R
-import com.owentech.devdrawer.activities.ClickHandlingActivity
-import com.owentech.devdrawer.activities.MainActivity
-import com.owentech.devdrawer.utils.Constants
+import de.psdev.devdrawer.R
+import de.psdev.devdrawer.activities.ClickHandlingActivity
+import de.psdev.devdrawer.activities.MainActivity
+import de.psdev.devdrawer.utils.Constants
 import mu.KLogging
 
 class DDWidgetProvider: AppWidgetProvider() {

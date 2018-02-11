@@ -1,4 +1,4 @@
-package com.owentech.devdrawer.utils
+package de.psdev.devdrawer.utils
 
 import android.content.Intent
 import android.content.pm.PackageManager

@@ -1,8 +1,8 @@
-package com.owentech.devdrawer
+package de.psdev.devdrawer
 
 import android.arch.persistence.room.Room
 import android.support.multidex.MultiDexApplication
-import com.owentech.devdrawer.database.DevDrawerDatabase
+import de.psdev.devdrawer.database.DevDrawerDatabase
 
 class DevDrawerApplication: MultiDexApplication() {
 
