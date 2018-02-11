@@ -46,7 +46,7 @@ apply from: rootProject.file('gradle/versioning.gradle')
 
 allprojects {
     group "de.psdev.devdrawer"
-    version enhancedVersion(2, 0)
+    version enhancedVersion(2, 0, 1)
 
     repositories {
         google()

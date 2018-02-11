@@ -3,28 +3,32 @@ import java.text.SimpleDateFormat
 ext {
     buildVersionCode = {
         final def (String major, String minor, String patch) = project.version.toString().toLowerCase().tokenize('.')
-        patchVersion = patch.substring(0, patch.indexOf("-"))
+        final def (String patchVersion, String commitCount) = patch.toLowerCase().tokenize('-')
 
-        (majorInt, minorInt, patchInt) = [major, minor, patchVersion].collect { it.toInteger() }
+        final def (Integer majorInt, Integer minorInt, Integer patchInt, Integer commitInt) = [major, minor, patchVersion, commitCount].collect { it.toInteger() }
 
-        final def majorPart = (majorInt * 1000000)
-        final def minorPart = (minorInt * 1000)
-        majorPart + minorPart + patchInt
+        final def majorPart = (majorInt * 10000000) // Range 00 - 99
+        final def minorPart = (minorInt * 100000) // Range 00 - 99
+        final def patchPart = (patchInt * 1000) // Range 00 - 99
+        final def commitPart = commitInt // Range 00 - 999
+        majorPart + minorPart + patchPart + commitPart
     }
-    enhancedVersion = { final int versionMajor, final int versionMinor ->
+    enhancedVersion = { final int versionMajor, final int versionMinor, final int versionPatch ->
         // Git commit count
         final gitHash = gitScmVersion()
         final Integer gitVersion
         try {
-            gitVersion = "git rev-list --first-parent --count HEAD".execute([], project.rootDir).text.trim().toInteger()
+            final String lastTaggedRevision = "git rev-list --tags --no-walk --max-count=1".execute([], project.rootDir).text.trim()
+            gitVersion = "git rev-list $lastTaggedRevision..HEAD --count".execute([], project.rootDir).text.trim().toInteger()
         } catch (final e) {
+            logger.warn("Error getting git commit count since last tag: $e")
             gitVersion = 999
         }
         final boolean hasModifiedDeletedOrOtherFiles = !"git ls-files -mdo --exclude-standard".execute([], project.rootDir).text.trim().empty
         final boolean hasStagedFiles = !"git diff-index --no-ext-diff --name-only --cached HEAD".execute([], project.rootDir).text.trim().empty
         final boolean dirtyWorkingCopy = hasModifiedDeletedOrOtherFiles || hasStagedFiles
         final gitDescription = dirtyWorkingCopy ? "${gitHash}-dirty" : gitHash
-        "${versionMajor}.${versionMinor}.${gitVersion}-${gitDescription}"
+        "${versionMajor}.${versionMinor}.${versionPatch}-${gitVersion}-${gitDescription}"
     }
     gitScmVersion = {
         final def command = "git rev-parse --verify --short=7 HEAD"
