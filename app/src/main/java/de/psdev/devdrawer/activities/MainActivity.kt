@@ -114,12 +114,14 @@ class MainActivity: AppCompatActivity(), TextWatcher {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-        // Catch the return from the EditDialog
-        if (resultCode == Constants.EDIT_DIALOG_CHANGE) {
-//            val bundle = data?.extras
-            //            final Database database = new Database(this);
-            //            database.amendFilterEntryTo(bundle.getString("id"), bundle.getString("newText"));
+        when (resultCode) {
+            Constants.EDIT_DIALOG_CHANGE -> {
+                data?.let {
+                    val id = it.getIntExtra("id", -1)
+                    val newFilter = it.getStringExtra("newText")
+                    packageFilterDao.updateFilter(id, newFilter)
+                }
+            }
         }
     }
 
@@ -152,7 +154,7 @@ class MainActivity: AppCompatActivity(), TextWatcher {
     override fun onTextChanged(charSequence: CharSequence, i: Int, i2: Int, i3: Int) {}
 
     override fun afterTextChanged(editable: Editable) {
-        packageNameCompletionAdapter.filter.filter(editable.toString())
+        packageNameCompletionAdapter.getFilter().filter(editable.toString())
     }
 
 }

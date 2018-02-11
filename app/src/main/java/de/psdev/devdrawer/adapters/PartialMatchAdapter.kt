@@ -13,9 +13,45 @@ import de.psdev.devdrawer.database.DevDrawerDatabase
 
 class PartialMatchAdapter(activity: Activity,
                           private val items: List<String>,
-                          private val devDrawerDatabase: DevDrawerDatabase): BaseAdapter(), Filterable {
+                          private val devDrawerDatabase: DevDrawerDatabase,
+                          private val editMode: Boolean = false): BaseAdapter(), Filterable {
     private val filteredItems = mutableListOf<String>()
     private val layoutInflater: LayoutInflater = activity.layoutInflater
+    private val packageFilter = object: Filter() {
+        override fun performFiltering(charSequence: CharSequence?): Filter.FilterResults {
+            return if (charSequence == null) {
+                FilterResults().apply {
+                    count = items.size
+                    values = items
+                }
+            } else {
+                val existingFilters = devDrawerDatabase.packageFilterDao()
+                    .filters()
+                    .blockingFirst()
+                    .map { it.filter }
+                val existingFilterRegexes = existingFilters
+                    .map { it.replace("*", ".*").toRegex() }
+                val filteredItems = items
+                    // Filter items already added
+                    .filterNot { !editMode && existingFilters.contains(it) }
+                    // Filter item matching existing filters with regex
+                    .filterNot { !editMode && existingFilterRegexes.any { regex -> regex.matches(it) } }
+                    // Filter matching
+                    .filter { it.toLowerCase().contains(charSequence.toString().toLowerCase()) }
+                Filter.FilterResults().apply {
+                    count = filteredItems.size
+                    values = filteredItems
+                }
+            }
+        }
+
+        @Suppress("UNCHECKED_CAST")
+        override fun publishResults(charSequence: CharSequence?, filterResults: Filter.FilterResults) {
+            filteredItems.clear()
+            filteredItems.addAll(filterResults.values as Collection<String>)
+            notifyDataSetChanged()
+        }
+    }
 
     // ==========================================================================================================================
     // BaseAdapter
@@ -37,43 +73,7 @@ class PartialMatchAdapter(activity: Activity,
     // Filterable
     // ==========================================================================================================================
 
-    override fun getFilter(): Filter {
-        return object: Filter() {
-            override fun performFiltering(charSequence: CharSequence?): Filter.FilterResults {
-                return if (charSequence == null) {
-                    FilterResults().apply {
-                        count = items.size
-                        values = items
-                    }
-                } else {
-                    val existingFilters = devDrawerDatabase.packageFilterDao()
-                        .filters()
-                        .blockingFirst()
-                        .map { it.filter }
-                    val existingFilterRegexes = existingFilters
-                        .map { it.replace("*", ".*").toRegex() }
-                    val filteredItems = items
-                        // Filter items already added
-                        .filterNot { existingFilters.contains(it) }
-                        // Filter item matching existing filters with regex
-                        .filterNot { existingFilterRegexes.any { regex -> regex.matches(it) } }
-                        // Filter matching
-                        .filter { it.toLowerCase().contains(charSequence.toString().toLowerCase()) }
-                    Filter.FilterResults().apply {
-                        count = filteredItems.size
-                        values = filteredItems
-                    }
-                }
-            }
-
-            @Suppress("UNCHECKED_CAST")
-            override fun publishResults(charSequence: CharSequence?, filterResults: Filter.FilterResults) {
-                filteredItems.clear()
-                filteredItems.addAll(filterResults.values as Collection<String>)
-                notifyDataSetChanged()
-            }
-        }
-    }
+    override fun getFilter(): Filter = packageFilter
 
     // ==========================================================================================================================
     // Private API

@@ -3,8 +3,6 @@ package de.psdev.devdrawer.adapters
 import android.app.Activity
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
-import android.content.Intent
-import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -75,14 +73,8 @@ class FilterListAdapter(private val activity: Activity,
 
         // OnClick action for Edit Button
         holder.editImageButton.setOnClickListener {
-            val intent = Intent(activity, EditDialog::class.java)
-            val bundle = Bundle().apply {
-                putString("text", packageFilter.filter)
-                putString("id", packageFilter.id.toString())
-            }
-            intent.putExtras(bundle)
-
-            activity.startActivityForResult(intent, 0)
+            val editDialogIntent = EditDialog.createStartIntent(activity, packageFilter.id, packageFilter.filter)
+            activity.startActivityForResult(editDialogIntent, 0)
         }
     }
 
