@@ -104,7 +104,11 @@ dependencies {
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
 
-    Logging
+    // LeakCanary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}"
+
+    // Logging
     implementation "de.psdev.slf4j-android-logger:slf4j-android-logger:${slf4jAndroidLoggerVersion}"
     implementation "io.github.microutils:kotlin-logging:${kotlinLoggingVersion}"
 
