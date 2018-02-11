@@ -1,0 +1,159 @@
+package com.owentech.devdrawer.activities
+
+import android.app.Activity
+import android.appwidget.AppWidgetManager
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
+import com.owentech.devdrawer.DevDrawerApplication
+import com.owentech.devdrawer.R
+import com.owentech.devdrawer.adapters.FilterListAdapter
+import com.owentech.devdrawer.adapters.PartialMatchAdapter
+import com.owentech.devdrawer.appwidget.DDWidgetProvider
+import com.owentech.devdrawer.database.PackageFilter
+import com.owentech.devdrawer.database.PackageFilterDao
+import com.owentech.devdrawer.utils.Constants
+import com.owentech.devdrawer.utils.consume
+import com.owentech.devdrawer.utils.getExistingPackages
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.plusAssign
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.main.*
+import mu.KLogging
+
+class MainActivity: AppCompatActivity(), TextWatcher {
+
+    companion object: KLogging() {
+        @JvmStatic
+        fun createStartIntent(context: Context): Intent = Intent(context, MainActivity::class.java)
+    }
+
+    private val devDrawerDatabase by lazy { (application as DevDrawerApplication).devDrawerDatabase }
+    private val appPackages: List<String> by lazy { packageManager.getExistingPackages() }
+    private val filterListAdapter: FilterListAdapter by lazy { FilterListAdapter(this, devDrawerDatabase) }
+    private val packageNameCompletionAdapter: PartialMatchAdapter by lazy { PartialMatchAdapter(this, appPackages, devDrawerDatabase) }
+    private val packageFilterDao: PackageFilterDao by lazy { devDrawerDatabase.packageFilterDao() }
+    private val subscriptions = CompositeDisposable()
+
+    // ==========================================================================================================================
+    // Android Lifecycle
+    // ==========================================================================================================================
+
+    public override fun onCreate(state: Bundle?) {
+        super.onCreate(state)
+
+        setContentView(R.layout.main)
+
+        actionBar?.apply {
+            setDisplayShowTitleEnabled(true)
+            title = "DevDrawer"
+        }
+
+        subscriptions += packageFilterDao.filters()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                filterListAdapter.data = it
+            }
+    }
+
+    override fun onContentChanged() {
+        super.onContentChanged()
+        packagesFilterListView.adapter = filterListAdapter
+        addPackageEditText.setAdapter(packageNameCompletionAdapter)
+        addPackageEditText.addTextChangedListener(this)
+        addButton.setOnClickListener { view ->
+            val filter = addPackageEditText.text.toString()
+            if (filter.isNotEmpty()) {
+                if (!filterListAdapter.data.map { it.filter }.contains(filter)) {
+                    subscriptions += packageFilterDao.addFilterAsync(PackageFilter(filter = filter))
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeBy(onComplete = {
+                            addPackageEditText.setText("")
+                            sendBroadcast(Intent(Constants.ACTION_REFRESH_APPS))
+                        })
+                } else {
+                    Toast.makeText(this, "Filter already exists", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
+    }
+
+    override fun onBackPressed() {
+        val intent = intent
+        val extras = intent.extras
+        var appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID
+        if (extras != null) {
+            appWidgetId = extras.getInt(
+                AppWidgetManager.EXTRA_APPWIDGET_ID,
+                AppWidgetManager.INVALID_APPWIDGET_ID)
+        }
+
+        if (appWidgetId != AppWidgetManager.INVALID_APPWIDGET_ID) {
+            val appWidgetManager = AppWidgetManager.getInstance(this)
+            val widget = DDWidgetProvider.createRemoteViews(this, appWidgetId)
+            appWidgetManager.updateAppWidget(appWidgetId, widget)
+            val resultValue = Intent()
+            resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
+            setResult(Activity.RESULT_OK, resultValue)
+            finish()
+        }
+
+        super.onBackPressed()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Catch the return from the EditDialog
+        if (resultCode == Constants.EDIT_DIALOG_CHANGE) {
+//            val bundle = data?.extras
+            //            final Database database = new Database(this);
+            //            database.amendFilterEntryTo(bundle.getString("id"), bundle.getString("newText"));
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menu.add(0, Constants.MENU_SETTINGS, 0, "Settings").apply {
+            setIcon(R.drawable.ic_action_settings_white)
+            setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW)
+        }
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            Constants.MENU_SETTINGS -> consume { startActivity(Intent(this, PrefActivity::class.java)) }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onDestroy() {
+        subscriptions.clear()
+        super.onDestroy()
+    }
+
+    // ==========================================================================================================================
+    // TextWatcher
+    // ==========================================================================================================================
+
+    override fun beforeTextChanged(charSequence: CharSequence, i: Int, i2: Int, i3: Int) {}
+
+    override fun onTextChanged(charSequence: CharSequence, i: Int, i2: Int, i3: Int) {}
+
+    override fun afterTextChanged(editable: Editable) {
+        packageNameCompletionAdapter.filter.filter(editable.toString())
+    }
+
+}
+

@@ -10,6 +10,6 @@
                     android:resizeMode="horizontal|vertical"
                     android:widgetCategory="keyguard|home_screen"
                     android:previewImage="@drawable/devdrawer_widget_preview"
-                    android:configure="com.owentech.DevDrawer.activities.MainActivity"
+                    android:configure="com.owentech.devdrawer.activities.MainActivity"
 
         />

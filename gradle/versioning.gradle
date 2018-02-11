@@ -1,6 +1,16 @@
 import java.text.SimpleDateFormat
 
-project.ext {
+ext {
+    buildVersionCode = {
+        final def (String major, String minor, String patch) = project.version.toString().toLowerCase().tokenize('.')
+        patchVersion = patch.substring(0, patch.indexOf("-"))
+
+        (majorInt, minorInt, patchInt) = [major, minor, patchVersion].collect { it.toInteger() }
+
+        final def majorPart = (majorInt * 1000000)
+        final def minorPart = (minorInt * 1000)
+        majorPart + minorPart + patchInt
+    }
     enhancedVersion = { final int versionMajor, final int versionMinor ->
         // Git commit count
         final gitHash = gitScmVersion()
@@ -16,18 +26,7 @@ project.ext {
         final gitDescription = dirtyWorkingCopy ? "${gitHash}-dirty" : gitHash
         "${versionMajor}.${versionMinor}.${gitVersion}-${gitDescription}"
     }
-    buildVersionCode = {
-        final def (String major, String minor, String patch) = project.version.toString().toLowerCase().tokenize('.')
-        patchVersion = patch.substring(0, patch.indexOf("-"))
-
-        (majorInt, minorInt, patchInt) = [major, minor, patchVersion].collect { it.toInteger() }
-
-        final def majorPart = (majorInt * 1000000)
-        final def minorPart = (minorInt * 1000)
-        majorPart + minorPart + patchInt
-    }
     gitScmVersion = {
-        println "[$project.name] Generate scmVersion in $project.projectDir"
         final def command = "git rev-parse --verify --short=7 HEAD"
         final def process = command.execute([], project.projectDir)
         process.text.trim()

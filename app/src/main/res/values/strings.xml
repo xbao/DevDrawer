@@ -21,12 +21,7 @@
     <!-- New -->
     <string name="packagefilter">PACKAGE FILTER:</string>
     <string name="yourcompanyhint">your.company.*</string>
-    <string name="addlocales">ADD LOCALES:</string>
-    <string name="localeHint">Language name or code</string>
     <string name="change">Change</string>
-    <string name="change_locale_dialog_title">Change Default Locale?</string>
-    <string name="change_locale_dialog_text">Change the phones default locale to </string>
-    <string name="yes">Yes</string>
 
     <array name="launching_intents">
         <item>AOSP Launcher</item>

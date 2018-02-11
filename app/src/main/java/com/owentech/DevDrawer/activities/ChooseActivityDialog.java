@@ -1,4 +1,4 @@
-package com.owentech.DevDrawer.activities;
+package com.owentech.devdrawer.activities;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -10,8 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import com.owentech.DevDrawer.R;
-import com.owentech.DevDrawer.adapters.ActivityListAdapter;
+import com.owentech.devdrawer.R;
+import com.owentech.devdrawer.adapters.ActivityListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

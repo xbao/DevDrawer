@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="primary">#FF9800</color>
+    <color name="primary_dark">#f57c00</color>
+    <color name="accent">#E65100
+    </color>
+
     <color name="app_name_light">#333333</color>
     <color name="app_name_dark">#EBEBEB</color>
 </resources>
