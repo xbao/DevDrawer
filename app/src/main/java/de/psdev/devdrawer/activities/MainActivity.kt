@@ -79,7 +79,9 @@ class MainActivity: AppCompatActivity(), TextWatcher {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeBy(onComplete = {
                             addPackageEditText.setText("")
-                            sendBroadcast(Intent(Constants.ACTION_REFRESH_APPS))
+                            sendBroadcast(Intent(Constants.ACTION_REFRESH_APPS).apply {
+                                setPackage(applicationContext.packageName)
+                            })
                         })
                 } else {
                     Toast.makeText(this, "Filter already exists", Toast.LENGTH_SHORT).show()

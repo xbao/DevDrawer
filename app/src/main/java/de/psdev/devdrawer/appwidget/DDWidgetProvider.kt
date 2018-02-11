@@ -29,7 +29,9 @@ class DDWidgetProvider: AppWidgetProvider() {
             } else {
                 RemoteViews(context.packageName, R.layout.widget_layout_dark)
             }
-            val reloadPendingIntent = PendingIntent.getBroadcast(context, 0, Intent(Constants.ACTION_REFRESH_APPS), PendingIntent.FLAG_UPDATE_CURRENT)
+            val reloadPendingIntent = PendingIntent.getBroadcast(context, 0, Intent(Constants.ACTION_REFRESH_APPS).apply {
+                setPackage(context.packageName)
+            }, PendingIntent.FLAG_UPDATE_CURRENT)
             widget.setOnClickPendingIntent(R.id.btn_reload, reloadPendingIntent)
 
             val mainActivityIntent = MainActivity.createStartIntent(context)

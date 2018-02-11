@@ -20,10 +20,10 @@
 
     <PreferenceCategory android:title="Sorting">
         <ListPreference
-            android:defaultValue="added"
+            android:defaultValue="@string/pref_sort_order_default"
             android:entries="@array/sorting_options"
             android:entryValues="@array/sorting_options_values"
-            android:key="widgetSorting"
+            android:key="@string/pref_sort_order"
             android:title="Widget Sorting Options" />
 
     </PreferenceCategory>

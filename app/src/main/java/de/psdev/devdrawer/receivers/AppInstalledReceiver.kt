@@ -9,7 +9,9 @@ class AppInstalledReceiver: BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         when (intent.action) {
-            Intent.ACTION_PACKAGE_ADDED -> context.sendBroadcast(Intent(Constants.ACTION_REFRESH_APPS))
+            Intent.ACTION_PACKAGE_ADDED -> context.sendBroadcast(Intent(Constants.ACTION_REFRESH_APPS).apply {
+                setPackage(context.packageName)
+            })
         }
     }
 }

@@ -2,12 +2,23 @@
 <resources>
     <string name="app_name">DevDrawer2</string>
     <array name="sorting_options">
-        <item>Order Added</item>
-        <item>Alphabetically</item>
+        <item>Last updated</item>
+        <item>First installed</item>
+        <item>Name</item>
+        <item>Package name</item>
     </array>
+    <string name="pref_sort_order" translatable="false">sort_order</string>
+    <string name="pref_sort_order_default" translatable="false">@string/sort_order_last_updated</string>
+
+    <string name="sort_order_last_updated" translatable="false">LAST_UPDATED</string>
+    <string name="sort_order_first_installed" translatable="false">FIRST_INSTALLED</string>
+    <string name="sort_order_name" translatable="false">NAME</string>
+    <string name="sort_order_package_name" translatable="false">PACKAGE_NAME</string>
     <array name="sorting_options_values">
-        <item>added</item>
-        <item>alphabetically</item>
+        <item>@string/sort_order_last_updated</item>
+        <item>@string/sort_order_first_installed</item>
+        <item>@string/sort_order_name</item>
+        <item>@string/sort_order_package_name</item>
     </array>
     <array name="widget_themes">
         <item>Light</item>

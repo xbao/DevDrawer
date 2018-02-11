@@ -3,6 +3,7 @@ package de.psdev.devdrawer.activities;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -10,28 +11,28 @@ import android.preference.PreferenceActivity;
 import android.widget.Toast;
 import de.psdev.devdrawer.R;
 import de.psdev.devdrawer.appwidget.DDWidgetProvider;
-import de.psdev.devdrawer.utils.Constants;
 
 public class PrefActivity extends PreferenceActivity {
-    SharedPreferences sp;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
-        sp = getPreferenceManager().getSharedPreferences();
+        sharedPreferences = getPreferenceManager().getSharedPreferences();
 
-        final ListPreference activityChoicePref = (ListPreference) findPreference("widgetSorting");
+        final ListPreference sortOrderPref = (ListPreference) findPreference(getString(R.string.pref_sort_order));
         final ListPreference themePref = (ListPreference) findPreference("theme");
         final ListPreference intentsPref = (ListPreference) findPreference("launchingIntents");
 
-        activityChoicePref.setSummary(nameFromValue(sp.getString(Constants.PREF_SORT_ORDER, Constants.ORDER_INSTALLED), activityChoicePref));
-        themePref.setSummary(sp.getString("theme", "Light"));
-        intentsPref.setSummary(intentNameFromValue(sp.getString("launchingIntents", "aosp"), intentsPref));
+        sortOrderPref.setSummary(
+            nameFromValue(sharedPreferences.getString(getString(R.string.pref_sort_order), getString(R.string.pref_sort_order_default)), sortOrderPref));
+        themePref.setSummary(sharedPreferences.getString("theme", "Light"));
+        intentsPref.setSummary(intentNameFromValue(sharedPreferences.getString("launchingIntents", "aosp"), intentsPref));
 
-        activityChoicePref.setOnPreferenceChangeListener((preference, newValue) -> {
-            final SharedPreferences.Editor editor = sp.edit();
+        sortOrderPref.setOnPreferenceChangeListener((preference, newValue) -> {
+            final SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(preference.getKey(), newValue.toString());
             editor.apply();
 
@@ -41,11 +42,11 @@ public class PrefActivity extends PreferenceActivity {
             final int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(getApplicationContext(), DDWidgetProvider.class));
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.listView);
 
-            return false;
+            return true;
         });
 
         themePref.setOnPreferenceChangeListener((preference, newValue) -> {
-            final SharedPreferences.Editor editor = sp.edit();
+            final SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(preference.getKey(), newValue.toString());
             editor.apply();
 
@@ -53,25 +54,26 @@ public class PrefActivity extends PreferenceActivity {
 
             Toast.makeText(this, "You may need to re-add the widget for this change to take effect", Toast.LENGTH_SHORT).show();
 
-            return false;
+            return true;
         });
 
         intentsPref.setOnPreferenceChangeListener((preference, newValue) -> {
-            final SharedPreferences.Editor editor = sp.edit();
+            final SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(preference.getKey(), newValue.toString());
             editor.apply();
 
             preference.setSummary(intentNameFromValue(newValue.toString(), preference));
 
-            return false;
+            return true;
         });
     }
 
     String nameFromValue(final String value, final Preference preference) {
         String ofTheSpaceCowboy = "";
 
-        final String[] values = getResources().getStringArray(R.array.sorting_options_values);
-        final String[] names = getResources().getStringArray(R.array.sorting_options);
+        final Resources resources = getResources();
+        final String[] values = resources.getStringArray(R.array.sorting_options_values);
+        final String[] names = resources.getStringArray(R.array.sorting_options);
 
         for (int i = 0; i < names.length; i++) {
             if (value.equals(values[i])) {

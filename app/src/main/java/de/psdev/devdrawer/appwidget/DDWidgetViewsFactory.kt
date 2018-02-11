@@ -152,13 +152,13 @@ class DDWidgetViewsFactory(private val context: Context, intent: Intent): Remote
                     val applicationInfo: ApplicationInfo = packageManager.getPackageInfo(it.packageName, PackageManager.GET_ACTIVITIES).applicationInfo
                     val appName = applicationInfo.loadLabel(packageManager).toString()
                     val appIcon = applicationInfo.loadIcon(packageManager)
-                    return@mapNotNull AppInfo(appName, it.packageName, appIcon, it.firstInstallTime)
+                    return@mapNotNull AppInfo(appName, it.packageName, appIcon, it.firstInstallTime, it.lastUpdateTime)
                 } catch (e: Exception) {
                     logger.warn("Error: {}", e.message, e)
                 }
                 return@mapNotNull null
             }
-            .sortedWith(getAppComparator())
+            .sortedWith(appComparator)
             .distinct()
             .toList()
 
@@ -166,13 +166,17 @@ class DDWidgetViewsFactory(private val context: Context, intent: Intent): Remote
         apps.addAll(appList)
     }
 
-    private fun getAppComparator(): Comparator<AppInfo> {
-        val sortOrder = sharedPreferences.getString(Constants.PREF_SORT_ORDER, Constants.ORDER_INSTALLED)
-        return when (sortOrder) {
-            Constants.ORDER_INSTALLED -> compareBy { it.firstInstallTime }
-            else -> compareBy { it.name }
+    private val appComparator: Comparator<AppInfo>
+        get() {
+            val defaultSortOrder = context.getString(R.string.pref_sort_order_default)
+            val sortOrder = SortOrder.valueOf(sharedPreferences.getString(context.getString(R.string.pref_sort_order), defaultSortOrder))
+            return when (sortOrder) {
+                SortOrder.FIRST_INSTALLED -> compareByDescending { it.firstInstalledTime }
+                SortOrder.LAST_UPDATED -> compareByDescending { it.lastUpdateTime }
+                SortOrder.NAME -> compareBy { it.name }
+                SortOrder.PACKAGE_NAME -> compareBy { it.packageName }
+            }
         }
-    }
 
     /**
      * Method to return a bitmap from drawable
@@ -197,7 +201,11 @@ class DDWidgetViewsFactory(private val context: Context, intent: Intent): Remote
     // Inner classes
     // ==========================================================================================================================
 
-    data class AppInfo(val name: String, val packageName: String, val appIcon: Drawable, val firstInstallTime: Long)
+    data class AppInfo(val name: String,
+                       val packageName: String,
+                       val appIcon: Drawable,
+                       val firstInstalledTime: Long,
+                       val lastUpdateTime: Long)
 
     object RefreshListEvent
 }
