@@ -17,8 +17,6 @@ import mu.KLogging
 class DDWidgetProvider: AppWidgetProvider() {
 
     companion object: KLogging() {
-        const val PACKAGE_STRING = "default.package"
-
         const val THEME_LIGHT = "Light"
 
         @JvmStatic
@@ -47,7 +45,9 @@ class DDWidgetProvider: AppWidgetProvider() {
             }
             widget.setRemoteAdapter(R.id.listView, appListServiceIntent)
 
-            val clickIntent = Intent(context, ClickHandlingActivity::class.java)
+            val clickIntent = Intent(context, ClickHandlingActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
             val clickPI = PendingIntent.getActivity(context, 0, clickIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
             widget.setPendingIntentTemplate(R.id.listView, clickPI)

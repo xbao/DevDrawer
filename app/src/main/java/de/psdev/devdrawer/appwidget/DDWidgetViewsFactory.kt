@@ -8,13 +8,13 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.content.ContextCompat
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import de.psdev.devdrawer.DevDrawerApplication
 import de.psdev.devdrawer.R
+import de.psdev.devdrawer.activities.ClickHandlingActivity
 import de.psdev.devdrawer.utils.Constants
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -91,31 +91,22 @@ class DDWidgetViewsFactory(private val context: Context, intent: Intent): Remote
                 row.setImageViewResource(R.id.uninstallImageButton, R.drawable.delete_imageview_dark)
             }
 
-            val appDetailsClickIntent = Intent()
-            val appDetailsClickExtras = Bundle().apply {
-                //putBoolean("appDetails", true);
-                putInt("launchType", Constants.LAUNCH_APP_DETAILS)
-                putString(DDWidgetProvider.PACKAGE_STRING, packageName)
+            val appDetailsClickIntent = Intent().apply {
+                putExtra(ClickHandlingActivity.EXTRA_LAUNCH_TYPE, Constants.LAUNCH_APP_DETAILS)
+                putExtra(ClickHandlingActivity.EXTRA_PACKAGE_NAME, packageName)
             }
-            appDetailsClickIntent.putExtras(appDetailsClickExtras)
             row.setOnClickFillInIntent(R.id.appDetailsImageButton, appDetailsClickIntent)
 
-            val uninstallClickIntent = Intent()
-            val uninstallClickExtras = Bundle().apply {
-                //appDetailsClickExtras.putBoolean("appDetails", true);
-                putInt("launchType", Constants.LAUNCH_UNINSTALL)
-                putString(DDWidgetProvider.PACKAGE_STRING, packageName)
+            val uninstallClickIntent = Intent().apply {
+                putExtra(ClickHandlingActivity.EXTRA_LAUNCH_TYPE, Constants.LAUNCH_UNINSTALL)
+                putExtra(ClickHandlingActivity.EXTRA_PACKAGE_NAME, packageName)
             }
-            uninstallClickIntent.putExtras(uninstallClickExtras)
             row.setOnClickFillInIntent(R.id.uninstallImageButton, uninstallClickIntent)
 
-            val rowClickIntent = Intent()
-            val rowClickExtras = Bundle().apply {
-                //rowClickExtras.putBoolean("appDetails", false);
-                putInt("launchType", Constants.LAUNCH_APP)
-                putString(DDWidgetProvider.PACKAGE_STRING, packageName)
+            val rowClickIntent = Intent().apply {
+                putExtra(ClickHandlingActivity.EXTRA_LAUNCH_TYPE, Constants.LAUNCH_APP)
+                putExtra(ClickHandlingActivity.EXTRA_PACKAGE_NAME, packageName)
             }
-            rowClickIntent.putExtras(rowClickExtras)
             row.setOnClickFillInIntent(R.id.touchArea, rowClickIntent)
 
             return row

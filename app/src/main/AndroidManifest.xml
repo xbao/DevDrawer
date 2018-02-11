@@ -10,9 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".activities.MainActivity"
-            android:label="@string/app_name">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -21,23 +19,28 @@
         </activity>
         <activity
             android:name=".activities.ClickHandlingActivity"
+            android:allowTaskReparenting="false"
             android:excludeFromRecents="true"
-            android:exported="true"
-            android:label="@string/app_name"
             android:noHistory="true"
             android:taskAffinity=""
-            android:theme="@style/Theme.AppCompat.Light.Dialog">
+            android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
+        <activity android:name=".activities.PrefActivity" />
+
         <activity
             android:name=".activities.EditDialog"
             android:theme="@android:style/Theme.Holo.Light.Dialog.NoActionBar" />
-        <activity android:name=".activities.PrefActivity" />
+
         <activity
             android:name=".activities.ChooseActivityDialog"
+            android:allowTaskReparenting="false"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:taskAffinity=""
             android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" />
 
         <receiver android:name=".receivers.AppInstalledReceiver">

@@ -53,7 +53,7 @@ class ChooseActivityDialog: Activity(), AdapterView.OnItemClickListener {
 
     override fun onItemClick(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
         val intent = Intent()
-        intent.component = ComponentName(packageName, activitiesList[i])
+        intent.component = ComponentName(appPackageName, activitiesList[i])
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
         finish()
