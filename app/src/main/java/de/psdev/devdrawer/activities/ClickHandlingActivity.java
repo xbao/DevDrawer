@@ -86,13 +86,12 @@ public class ClickHandlingActivity extends AppCompatActivity {
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(activity);
         if (sp.getBoolean("showActivityChoice", false)) {
             // Show the activity choice dialog
-            final Intent intent = new Intent(activity, ChooseActivityDialog.class);
+            final Intent intent = ChooseActivityDialog.createStartIntent(activity, packageName);
             if (sp.getString("launchingIntents", "aosp").equals("aosp")) {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
             } else {
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
             }
-            intent.putExtra("packageName", packageName);
             activity.startActivity(intent);
             activity.finish();
 
