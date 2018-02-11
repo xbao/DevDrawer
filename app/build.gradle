@@ -37,13 +37,15 @@ android {
         debug {
         }
         release {
-            final def keystoreProperties = new Properties()
-            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+            if (keystorePropertiesFile.exists()) {
+                final def keystoreProperties = new Properties()
+                keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
-            storeFile file(keystoreProperties['keyStore'])
-            storePassword keystoreProperties['keyStorePassword']
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyAliasPassword']
+                storeFile file(keystoreProperties['keyStore'])
+                storePassword keystoreProperties['keyStorePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyAliasPassword']
+            }
         }
     }
     buildTypes {
