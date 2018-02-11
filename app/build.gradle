@@ -32,11 +32,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    final def keystorePropertiesFile = rootProject.file("release.properties")
     signingConfigs {
         debug {
         }
         release {
-            final def keystorePropertiesFile = rootProject.file("release.properties");
             final def keystoreProperties = new Properties()
             keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
@@ -53,7 +53,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            if (keystorePropertiesFile.exists()) {
+                signingConfig signingConfigs.release
+            } else {
+                signingConfig signingConfigs.debug
+            }
         }
     }
     packagingOptions {
@@ -93,7 +97,7 @@ dependencies {
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
 
-     Logging
+    Logging
     implementation "de.psdev.slf4j-android-logger:slf4j-android-logger:${slf4jAndroidLoggerVersion}"
     implementation "io.github.microutils:kotlin-logging:${kotlinLoggingVersion}"
 
