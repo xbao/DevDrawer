@@ -67,9 +67,6 @@ dependencies {
     testImplementation "org.robolectric:robolectric:${robolectricVersion}"
     testImplementation "org.assertj:assertj-core:${assertjVersion}"
     testImplementation "org.mockito:mockito-core:${mockitoVersion}"
-    testImplementation "com.google.guava:guava:${guavaVersion}"
-    testImplementation "com.google.code.findbugs:jsr305:${jsr305Version}"
-    androidTestImplementation "com.android.support:multidex-instrumentation:${multidexVersion}"
 
     //
     // Runtime dependencies
@@ -77,9 +74,6 @@ dependencies {
 
     // Support Library
     implementation "com.android.support:appcompat-v7:${supportLibVersion}"
-//    implementation "com.android.support:support-v4:${supportLibVersion}"
-//    implementation "com.android.support:recyclerview-v7:${supportLibVersion}"
-//    implementation "com.android.support:multidex:${multidexVersion}"
 
     // Android Architecture Libraries
     implementation "android.arch.persistence.room:runtime:${androidArchitectureVersion}"
@@ -89,29 +83,8 @@ dependencies {
     // Android Kotlin Extensions
     implementation 'androidx.core:core-ktx:0.1'
 
-    // ButterKnife
-//    implementation "com.jakewharton:butterknife:${butterknifeVersion}"
-//    kapt "com.jakewharton:butterknife-compiler:${butterknifeVersion}"
-
-    // Dagger
-//    implementation "com.google.dagger:dagger-android-support:${daggerVersion}"
-//    kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
-//    kapt "com.google.dagger:dagger-android-processor:${daggerVersion}"
-
-    // Gson
-    implementation "com.google.code.gson:gson:${gsonVersion}"
-
-    // Guava
-//    implementation "com.google.guava:guava:${guavaVersion}"
-
-    // JSR-305
-//    implementation "com.google.code.findbugs:jsr305:${jsr305Version}"
-
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
-
-    // libsuperuser
-    implementation 'eu.chainfire:libsuperuser:1.0.0.201704021214'
 
      Logging
     implementation "de.psdev.slf4j-android-logger:slf4j-android-logger:${slf4jAndroidLoggerVersion}"

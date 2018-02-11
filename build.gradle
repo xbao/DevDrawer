@@ -19,13 +19,7 @@ buildscript {
         robolectricVersion = "3.7"
         // Dependencies - Runtime
         androidArchitectureVersion = "1.0.0"
-        butterknifeVersion = "8.8.1"
-        daggerVersion = "2.14.1"
-        gsonVersion = "2.8.2"
-        guavaVersion = "24.0-android"
-        jsr305Version = "3.0.2"
         kotlinLoggingVersion = "1.5.3"
-        multidexVersion = "1.0.2"
         rxandroidVersion = "2.0.1"
         rxjavaVersion = "2.1.9"
         rxkotlinVersion = "2.2.0"
