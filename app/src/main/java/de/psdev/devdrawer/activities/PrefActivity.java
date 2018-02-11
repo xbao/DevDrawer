@@ -59,7 +59,7 @@ public class PrefActivity extends PreferenceActivity {
         intentsPref.setOnPreferenceChangeListener((preference, newValue) -> {
             final SharedPreferences.Editor editor = sp.edit();
             editor.putString(preference.getKey(), newValue.toString());
-            editor.commit();
+            editor.apply();
 
             preference.setSummary(intentNameFromValue(newValue.toString(), preference));
 

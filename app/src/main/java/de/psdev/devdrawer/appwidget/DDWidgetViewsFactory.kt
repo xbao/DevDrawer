@@ -73,14 +73,8 @@ class DDWidgetViewsFactory(private val context: Context, intent: Intent): Remote
         logger.debug { "getViewAt[position=$position]" }
         val (appName, packageName, appIcon) = apps[position]
 
-        val rootClearCache = sharedPreferences.getBoolean("rootClearCache", false)
-
         // Setup the list item and intents for on click
-        val row = RemoteViews(context.packageName,
-            if (rootClearCache)
-                R.layout.list_item_more
-            else
-                R.layout.list_item)
+        val row = RemoteViews(context.packageName, R.layout.list_item)
 
         try {
             row.setTextViewText(R.id.packageNameTextView, packageName)
