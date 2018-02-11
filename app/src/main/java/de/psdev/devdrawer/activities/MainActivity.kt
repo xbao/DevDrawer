@@ -128,16 +128,14 @@ class MainActivity: AppCompatActivity(), TextWatcher {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menu.add(0, Constants.MENU_SETTINGS, 0, "Settings").apply {
-            setIcon(R.drawable.ic_action_settings_white)
-            setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW)
-        }
-        return true
+        menuInflater.inflate(R.menu.activity_main, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            Constants.MENU_SETTINGS -> consume { startActivity(Intent(this, PrefActivity::class.java)) }
+            R.id.action_settings -> consume { startActivity(Intent(this, PrefActivity::class.java)) }
+            R.id.action_info -> consume { TODO("Implement app info screen") }
             else -> super.onOptionsItemSelected(item)
         }
     }

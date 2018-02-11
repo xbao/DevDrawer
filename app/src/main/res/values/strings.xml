@@ -32,6 +32,8 @@
     <string name="edit_filter">Edit filter</string>
     <string name="delete_filter">Delete filter</string>
     <string name="package_filter_hint">com.example.*</string>
+    <string name="settings">Settings</string>
+    <string name="app_info">App info</string>
 
     <array name="launching_intents">
         <item>AOSP Launcher</item>

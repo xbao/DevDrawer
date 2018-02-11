@@ -13,6 +13,4 @@ object Constants {
     const val LAUNCH_APP_DETAILS = 2
     const val LAUNCH_UNINSTALL = 3
 
-    const val MENU_SETTINGS = 1
-
 }
