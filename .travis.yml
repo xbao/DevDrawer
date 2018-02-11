@@ -1,9 +1,11 @@
 language: android
-before_script:
-  - yes | /usr/local/android-sdk/tools/bin/sdkmanager --licenses
+before_install:
+  - yes | sdkmanager "platforms;android-27"
 android:
   components:
     - tools
     - platform-tools
     - build-tools-27.0.3
-    - android-27
+  licenses:
+    - 'android-sdk-license-.+'
+    - 'android-sdk-preview-license-.+'
