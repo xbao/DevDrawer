@@ -85,12 +85,10 @@ class DDWidgetViewsFactory(private val context: Context, intent: Intent): Remote
                 row.setTextColor(R.id.appNameTextView, ContextCompat.getColor(context, R.color.app_name_light))
                 row.setImageViewResource(R.id.appDetailsImageButton, R.drawable.settings_imageview)
                 row.setImageViewResource(R.id.uninstallImageButton, R.drawable.delete_imageview)
-                row.setImageViewResource(R.id.moreImageButton, R.drawable.more_imageview)
             } else {
                 row.setTextColor(R.id.appNameTextView, ContextCompat.getColor(context, R.color.app_name_dark))
                 row.setImageViewResource(R.id.appDetailsImageButton, R.drawable.settings_imageview_dark)
                 row.setImageViewResource(R.id.uninstallImageButton, R.drawable.delete_imageview_dark)
-                row.setImageViewResource(R.id.moreImageButton, R.drawable.more_imageview_dark)
             }
 
             val appDetailsClickIntent = Intent()
@@ -110,14 +108,6 @@ class DDWidgetViewsFactory(private val context: Context, intent: Intent): Remote
             }
             uninstallClickIntent.putExtras(uninstallClickExtras)
             row.setOnClickFillInIntent(R.id.uninstallImageButton, uninstallClickIntent)
-
-            val moreClickIntent = Intent()
-            val moreClickExtras = Bundle().apply {
-                putInt("launchType", Constants.LAUNCH_MORE)
-                putString(DDWidgetProvider.PACKAGE_STRING, packageName)
-            }
-            moreClickIntent.putExtras(moreClickExtras)
-            row.setOnClickFillInIntent(R.id.moreImageButton, moreClickIntent)
 
             val rowClickIntent = Intent()
             val rowClickExtras = Bundle().apply {
