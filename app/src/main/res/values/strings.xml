@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">DevDrawer</string>
+    <string name="app_name">DevDrawer2</string>
     <array name="sorting_options">
         <item>Order Added</item>
         <item>Alphabetically</item>
