@@ -1,0 +1,4 @@
+keyStore=../release.jks
+keyStorePassword=PASSWORD
+keyAlias=ALIAS
+keyAliasPassword=PASSWORD

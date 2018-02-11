@@ -36,6 +36,14 @@ android {
         debug {
         }
         release {
+            final def keystorePropertiesFile = rootProject.file("release.properties");
+            final def keystoreProperties = new Properties()
+            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+            storeFile file(keystoreProperties['keyStore'])
+            storePassword keystoreProperties['keyStorePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyAliasPassword']
         }
     }
     buildTypes {
@@ -43,9 +51,9 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
     packagingOptions {
