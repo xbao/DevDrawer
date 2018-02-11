@@ -7,7 +7,7 @@
         android:id="@+id/container_actions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FF8800"
+        android:background="@color/primary"
         android:gravity="right"
         android:padding="4dp">
 
@@ -34,7 +34,7 @@
         android:layout_width="4dp"
         android:layout_height="match_parent"
         android:layout_below="@id/container_actions"
-        android:background="#FF8800" />
+        android:background="@color/primary" />
 
     <ListView
         android:id="@+id/listView"
