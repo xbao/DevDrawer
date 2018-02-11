@@ -4,6 +4,6 @@
     <color name="primary_dark">#689F38</color>
     <color name="accent">#9CCC65</color>
 
-    <color name="app_name_light">#333333</color>
+    <color name="app_name_light">#000000</color>
     <color name="app_name_dark">#EBEBEB</color>
 </resources>

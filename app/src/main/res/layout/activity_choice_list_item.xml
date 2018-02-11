@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/activityPathTextView"
         android:ellipsize="end"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#000"
         android:textIsSelectable="false"
         tools:text=".MainActivity" />

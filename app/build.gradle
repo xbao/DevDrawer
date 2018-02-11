@@ -63,6 +63,10 @@ android {
             }
         }
     }
+    lintOptions {
+        lintConfig project.file('lint.xml')
+        disable "GoogleAppIndexingWarning"
+    }
     packagingOptions {
         exclude '**/LICENSE'
         exclude '**/LICENSE.txt'

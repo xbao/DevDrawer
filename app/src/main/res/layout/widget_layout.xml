@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/primary"
-        android:gravity="right"
+        android:gravity="end"
         android:padding="4dp">
 
         <ImageButton
