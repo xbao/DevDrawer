@@ -1,14 +1,13 @@
 # DevDrawer [![Build Status](https://travis-ci.org/hameno/DevDrawer.svg?branch=master)](https://travis-ci.org/hameno/DevDrawer)
 
-An Android application by [Tony Owen](https://plus.google.com/111365666249481367719) designed to help developers by automatically adding their apps to a widget for easy launching / uninstalling / reinstalling etc.
+An Android application designed to help developers by automatically adding their apps to a widget for easy launching / uninstalling / reinstalling etc.  
 
-Root features such as one click uninstall, and clear cache added by [Ronald Ammann](https://plus.google.com/115926327659831685384/posts).
+This app is largely based on the concept and work of [Tony Owen](https://plus.google.com/111365666249481367719) and his original [DevDrawer](https://play.google.com/store/apps/details?id=com.owentech.DevDrawer) app. Most of the original implementation has been rewritten and replaced.
 
-This project needs a library dependency to [libsuperuser](https://github.com/Chainfire/libsuperuser).
+*Changes compared to the orignal app:*  
+* Support for Adaptive Icons on Android O and higher
+* Project setup switched to gradle
+* Mostly written in Kotlin
+* _NO_ support for multiple different widgets (yet)
 
-[Download DevDrawer in the Google Play Store](https://play.google.com/store/apps/details?id=com.owentech.DevDrawer).
-
-**About this fork**
- 
-This fork upgrades to gradle and fixes issues with newer Android version (e.g. Adaptive Icons on Android O). It is currently based on the old version on the master branch.   
-**The develop branch is not maintained.**
+[Download DevDrawer in the Google Play Store](https://play.google.com/store/apps/details?id=de.psdev.devdrawer) (Not yet available)
