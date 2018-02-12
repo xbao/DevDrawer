@@ -13,6 +13,8 @@ import de.psdev.devdrawer.activities.ClickHandlingActivity
 import de.psdev.devdrawer.activities.MainActivity
 import de.psdev.devdrawer.utils.Constants
 import mu.KLogging
+import java.text.DateFormat
+import java.util.*
 
 class DDWidgetProvider: AppWidgetProvider() {
 
@@ -29,13 +31,17 @@ class DDWidgetProvider: AppWidgetProvider() {
             } else {
                 RemoteViews(context.packageName, R.layout.widget_layout_dark)
             }
+
+            widget.setTextViewText(R.id.txt_last_updated, DateFormat.getTimeInstance().format(Date()))
+
             val reloadPendingIntent = PendingIntent.getBroadcast(context, 0, Intent(Constants.ACTION_REFRESH_APPS).apply {
                 setPackage(context.packageName)
             }, PendingIntent.FLAG_UPDATE_CURRENT)
             widget.setOnClickPendingIntent(R.id.btn_reload, reloadPendingIntent)
 
-            val mainActivityIntent = MainActivity.createStartIntent(context)
-            mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            val mainActivityIntent = MainActivity.createStartIntent(context).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            }
             val mainActivityPendingIntent = PendingIntent.getActivity(context, 0, mainActivityIntent, PendingIntent.FLAG_UPDATE_CURRENT)
             widget.setOnClickPendingIntent(R.id.btn_settings, mainActivityPendingIntent)
 
@@ -67,6 +73,7 @@ class DDWidgetProvider: AppWidgetProvider() {
             try {
                 val widget = createRemoteViews(context, appWidgetId)
                 appWidgetManager.updateAppWidget(appWidgetId, widget)
+                appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.listView)
             } catch (e: Exception) {
                 logger.warn(e) { "Error updating widget: $appWidgetId: ${e.message}" }
             }

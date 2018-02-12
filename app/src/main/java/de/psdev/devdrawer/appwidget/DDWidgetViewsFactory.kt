@@ -1,7 +1,9 @@
 package de.psdev.devdrawer.appwidget
 
 import android.appwidget.AppWidgetManager
-import android.content.*
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -16,9 +18,6 @@ import de.psdev.devdrawer.DevDrawerApplication
 import de.psdev.devdrawer.R
 import de.psdev.devdrawer.activities.ClickHandlingActivity
 import de.psdev.devdrawer.utils.Constants
-import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.plusAssign
 import mu.KLogging
 
 class DDWidgetViewsFactory(private val context: Context, intent: Intent): RemoteViewsService.RemoteViewsFactory {
@@ -33,38 +32,22 @@ class DDWidgetViewsFactory(private val context: Context, intent: Intent): Remote
     private val sharedPreferences: SharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(context) }
 
     private val apps: MutableList<AppInfo> = mutableListOf()
-    private val subscriptions = CompositeDisposable()
 
     // ==========================================================================================================================
     // RemoteViewsService.RemoteViewsFactory
     // ==========================================================================================================================
 
     override fun onCreate() {
-        logger.debug { "onCreate" }
-        subscriptions += Observable.create<RefreshListEvent> { emitter ->
-            val receiver = object: BroadcastReceiver() {
-                override fun onReceive(context: Context, intent: Intent) {
-                    logger.debug { "Received $intent" }
-                    emitter.onNext(RefreshListEvent)
-                }
-            }
-            emitter.setCancellable { context.unregisterReceiver(receiver) }
-            context.registerReceiver(receiver, IntentFilter(Constants.ACTION_REFRESH_APPS))
-
-        }.subscribe {
-                appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, viewId)
-            }
+        logger.warn { "onCreate" }
     }
 
     override fun onDataSetChanged() {
-        logger.debug { "onDataSetChanged" }
-        // Update the dataset
+        logger.warn { "onDataSetChanged" }
         loadApps()
     }
 
     override fun onDestroy() {
-        logger.debug { "onDestroy" }
-        subscriptions.clear()
+        logger.warn { "onDestroy" }
     }
 
     override fun getCount(): Int = apps.size
@@ -207,5 +190,4 @@ class DDWidgetViewsFactory(private val context: Context, intent: Intent): Remote
                        val firstInstalledTime: Long,
                        val lastUpdateTime: Long)
 
-    object RefreshListEvent
 }
