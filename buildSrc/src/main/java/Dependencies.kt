@@ -14,7 +14,7 @@ object Versions {
     const val kotlinLogging = "1.5.3"
     const val leakCanary = "1.5.4"
     const val rxjava2 = "2.1.9"
-    const val rxandroid = "2.0.1"
+    const val rxandroid = "2.0.2"
     const val rxkotlin = "2.2.0"
     const val slf4jAndroidLogger = "1.0.5"
 
