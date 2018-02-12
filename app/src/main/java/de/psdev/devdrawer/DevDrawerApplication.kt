@@ -48,7 +48,10 @@ class DevDrawerApplication: MultiDexApplication() {
 
     private fun setupJobScheduler() {
         JobManager.create(this).addJobCreator(UpdateJobCreator(this))
-        UpdateJob.scheduleJob()
+        UpdateJob.enableJob()
+        logger.debug { "Job requests: ${JobManager.instance().allJobRequests}" }
+        logger.debug { "Jobs: ${JobManager.instance().allJobs}" }
+        logger.debug { "Job results: ${JobManager.instance().allJobResults}" }
     }
 
 }
