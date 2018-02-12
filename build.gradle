@@ -2,41 +2,15 @@
 apply plugin: 'com.github.ben-manes.versions'
 
 buildscript {
-    ext {
-        // Plugin versions
-        androidGradleVersion = "3.2.0-alpha02"
-        gradleVersionsVersion = "0.17.0"
-        kotlinVersion = "1.2.21"
-        // Project configuration
-        projectMinSdkVersion = 16
-        projectTargetSdkVersion = 27
-        projectCompileSdkVersion = 27
-        projectBuildTools = "27.0.3"
-        // Dependencies - Test
-        assertjVersion = "3.9.0"
-        junitVersion = "4.12"
-        mockitoVersion = "2.15.0"
-        robolectricVersion = "3.7"
-        // Dependencies - Runtime
-        androidArchitectureVersion = "1.0.0"
-        kotlinLoggingVersion = "1.5.3"
-        leakCanaryVersion = "1.5.4"
-        rxandroidVersion = "2.0.1"
-        rxjavaVersion = "2.1.9"
-        rxkotlinVersion = "2.2.0"
-        slf4jVersion = "1.7.25"
-        slf4jAndroidLoggerVersion = "1.0.5"
-        supportLibVersion = "27.0.2"
-    }
     repositories {
         google()
         mavenCentral()
         maven { url "https://plugins.gradle.org/m2" }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$androidGradleVersion"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath "com.github.ben-manes:gradle-versions-plugin:$gradleVersionsVersion"
+        classpath Plugins.android_gradle
+        classpath Plugins.kotlin_gradle
+        classpath Plugins.versions_gradle
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

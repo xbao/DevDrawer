@@ -4,13 +4,13 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion projectCompileSdkVersion
-    buildToolsVersion projectBuildTools
+    compileSdkVersion Config.compile_sdk
+    buildToolsVersion Config.build_tools
 
     defaultConfig {
         applicationId "de.psdev.devdrawer"
-        minSdkVersion projectMinSdkVersion
-        targetSdkVersion projectTargetSdkVersion
+        minSdkVersion Config.min_sdk
+        targetSdkVersion Config.target_sdk
         versionCode project.ext.appVersionCode
         versionName project.ext.appVersionName
 
@@ -81,40 +81,40 @@ dependencies {
     //
     // Test dependencies
     //
-    testImplementation "junit:junit:${junitVersion}"
-    testImplementation "org.robolectric:robolectric:${robolectricVersion}"
-    testImplementation "org.assertj:assertj-core:${assertjVersion}"
-    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    testImplementation Libs.junit
+    testImplementation Libs.robolectric
+    testImplementation Libs.assertj
+    testImplementation Libs.mockito
 
     //
     // Runtime dependencies
     //
 
     // Support Library
-    implementation "com.android.support:appcompat-v7:${supportLibVersion}"
+    implementation Libs.support_appcompat_v7
 
     // Android Architecture Libraries
-    implementation "android.arch.persistence.room:runtime:${androidArchitectureVersion}"
-    implementation "android.arch.persistence.room:rxjava2:${androidArchitectureVersion}"
-    kapt "android.arch.persistence.room:compiler:${androidArchitectureVersion}"
+    implementation Libs.room_runtime
+    implementation Libs.room_rxjava2
+    kapt Libs.room_compiler
 
     // Android Kotlin Extensions
-    implementation 'androidx.core:core-ktx:0.1'
+    implementation Libs.android_ktx
 
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
+    implementation Libs.kotlin_stdlib
 
     // LeakCanary
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
-    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}"
+    debugImplementation Libs.leak_canary
+    releaseImplementation Libs.leak_canary_no_op
 
     // Logging
-    implementation "de.psdev.slf4j-android-logger:slf4j-android-logger:${slf4jAndroidLoggerVersion}"
-    implementation "io.github.microutils:kotlin-logging:${kotlinLoggingVersion}"
+    implementation Libs.slf4j_android_logger
+    implementation Libs.kotlin_logging
 
     // RxJava
-    implementation "io.reactivex.rxjava2:rxjava:${rxjavaVersion}"
-    implementation "io.reactivex.rxjava2:rxandroid:${rxandroidVersion}"
-    implementation "io.reactivex.rxjava2:rxkotlin:${rxkotlinVersion}"
+    implementation Libs.rxjava2
+    implementation Libs.rxandroid
+    implementation Libs.rxkotlin
 
 }
