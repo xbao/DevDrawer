@@ -10,6 +10,7 @@ object Versions {
     const val androidArchitectureComponents = "1.0.0"
     const val androidSupportLib = "27.0.2"
     const val androidKotlinExtensions = "0.1"
+    const val androidJob = "1.2.4"
     const val kotlinLogging = "1.5.3"
     const val leakCanary = "1.5.4"
     const val rxjava2 = "2.1.9"
@@ -48,6 +49,9 @@ object Libs {
 
     // Android Kotlin Extensions
     val android_ktx = "androidx.core:core-ktx:${Versions.androidKotlinExtensions}"
+
+    // Android-Job
+    val android_job = "com.evernote:android-job:${Versions.androidJob}"
 
     // Kotlin
     val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"

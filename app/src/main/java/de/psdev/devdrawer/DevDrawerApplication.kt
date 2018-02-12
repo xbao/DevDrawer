@@ -4,7 +4,10 @@ import android.arch.persistence.room.Room
 import android.content.Intent
 import android.content.IntentFilter
 import android.support.multidex.MultiDexApplication
+import com.evernote.android.job.JobManager
 import com.squareup.leakcanary.LeakCanary
+import de.psdev.devdrawer.appwidget.UpdateJob
+import de.psdev.devdrawer.appwidget.UpdateJobCreator
 import de.psdev.devdrawer.database.DevDrawerDatabase
 import de.psdev.devdrawer.receivers.AppInstallationReceiver
 import mu.KLogging
@@ -28,6 +31,7 @@ class DevDrawerApplication: MultiDexApplication() {
             }
             LeakCanary.install(this)
             registerAppInstallationReceiver()
+            setupJobScheduler()
         }.let {
             logger.warn("{} version {} ({}) took {}ms to init", this::class.java.simpleName, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE, it)
         }
@@ -40,6 +44,11 @@ class DevDrawerApplication: MultiDexApplication() {
             addAction(Intent.ACTION_PACKAGE_REPLACED)
             addDataScheme("package")
         })
+    }
+
+    private fun setupJobScheduler() {
+        JobManager.create(this).addJobCreator(UpdateJobCreator(this))
+        UpdateJob.scheduleJob()
     }
 
 }

@@ -101,6 +101,9 @@ dependencies {
     // Android Kotlin Extensions
     implementation Libs.android_ktx
 
+    // Android-Job
+    implementation Libs.android_job
+
     // Kotlin
     implementation Libs.kotlin_stdlib
 

@@ -18,6 +18,7 @@ import de.psdev.devdrawer.adapters.PartialMatchAdapter
 import de.psdev.devdrawer.appwidget.DDWidgetProvider
 import de.psdev.devdrawer.database.PackageFilter
 import de.psdev.devdrawer.database.PackageFilterDao
+import de.psdev.devdrawer.receivers.UpdateReceiver
 import de.psdev.devdrawer.utils.Constants
 import de.psdev.devdrawer.utils.consume
 import de.psdev.devdrawer.utils.getExistingPackages
@@ -79,9 +80,7 @@ class MainActivity: AppCompatActivity(), TextWatcher {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeBy(onComplete = {
                             addPackageEditText.setText("")
-                            sendBroadcast(Intent(Constants.ACTION_REFRESH_APPS).apply {
-                                setPackage(applicationContext.packageName)
-                            })
+                            UpdateReceiver.send(this)
                         })
                 } else {
                     Toast.makeText(this, "Filter already exists", Toast.LENGTH_SHORT).show()

@@ -11,7 +11,7 @@ import android.widget.RemoteViews
 import de.psdev.devdrawer.R
 import de.psdev.devdrawer.activities.ClickHandlingActivity
 import de.psdev.devdrawer.activities.MainActivity
-import de.psdev.devdrawer.utils.Constants
+import de.psdev.devdrawer.receivers.UpdateReceiver
 import mu.KLogging
 import java.text.DateFormat
 import java.util.*
@@ -34,9 +34,7 @@ class DDWidgetProvider: AppWidgetProvider() {
 
             widget.setTextViewText(R.id.txt_last_updated, DateFormat.getTimeInstance().format(Date()))
 
-            val reloadPendingIntent = PendingIntent.getBroadcast(context, 0, Intent(Constants.ACTION_REFRESH_APPS).apply {
-                setPackage(context.packageName)
-            }, PendingIntent.FLAG_UPDATE_CURRENT)
+            val reloadPendingIntent = PendingIntent.getBroadcast(context, 0, Intent(context, UpdateReceiver::class.java), PendingIntent.FLAG_UPDATE_CURRENT)
             widget.setOnClickPendingIntent(R.id.btn_reload, reloadPendingIntent)
 
             val mainActivityIntent = MainActivity.createStartIntent(context).apply {

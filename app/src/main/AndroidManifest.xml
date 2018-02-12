@@ -55,11 +55,7 @@
 
         <receiver
             android:name=".receivers.UpdateReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="de.psdev.devdrawer.REFRESH_APPS" />
-            </intent-filter>
-        </receiver>
+            android:exported="false" />
 
         <service
             android:name=".appwidget.DDWidgetService"
