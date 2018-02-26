@@ -9,13 +9,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.provider.Settings
-import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import de.psdev.devdrawer.R
 import de.psdev.devdrawer.utils.Constants
 import mu.KLogging
 
-class ClickHandlingActivity: AppCompatActivity() {
+class ClickHandlingActivity: Activity() {
     companion object: KLogging() {
         const val EXTRA_PACKAGE_NAME = "packageName"
         const val EXTRA_LAUNCH_TYPE = "launchType"
