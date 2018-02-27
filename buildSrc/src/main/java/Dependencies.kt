@@ -3,25 +3,26 @@ object Versions {
     const val kotlin = "1.2.21"
 
     // Plugins
-    const val androidGradle = "3.2.0-alpha02"
+    const val androidGradle = "3.2.0-alpha04"
     const val gradleVersions = "0.17.0"
 
     // Libs
-    const val androidArchitectureComponents = "1.0.0"
-    const val androidSupportLib = "27.0.2"
+    const val androidArchitectureComponents = "1.1.0-alpha2"
+    const val androidSupportLib = "27.1.0"
     const val androidKotlinExtensions = "0.1"
     const val androidJob = "1.2.4"
     const val kotlinLogging = "1.5.3"
     const val leakCanary = "1.5.4"
-    const val rxjava2 = "2.1.9"
+    const val multidexVersion = "1.0.3"
+    const val rxjava2 = "2.1.10"
     const val rxandroid = "2.0.2"
     const val rxkotlin = "2.2.0"
     const val slf4jAndroidLogger = "1.0.5"
 
     // Testing
     const val junit = "4.12"
-    const val robolectric = "3.7"
-    const val assertj = "3.9.0"
+    const val robolectric = "3.7.1"
+    const val assertj = "3.9.1"
     const val mockito = "2.15.0"
 }
 
@@ -63,6 +64,10 @@ object Libs {
     // Logging
     val slf4j_android_logger = "de.psdev.slf4j-android-logger:slf4j-android-logger:${Versions.slf4jAndroidLogger}"
     val kotlin_logging = "io.github.microutils:kotlin-logging:${Versions.kotlinLogging}"
+
+    // MultiDex
+    val multidex = "com.android.support:multidex:${Versions.multidexVersion}"
+    val multidex_instrumentation = "com.android.support:multidex-instrumentation:${Versions.multidexVersion}"
 
     // RxJava
     val rxjava2 = "io.reactivex.rxjava2:rxjava:${Versions.rxjava2}"

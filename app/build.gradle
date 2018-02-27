@@ -85,6 +85,7 @@ dependencies {
     testImplementation Libs.robolectric
     testImplementation Libs.assertj
     testImplementation Libs.mockito
+    androidTestImplementation Libs.multidex_instrumentation
 
     //
     // Runtime dependencies
@@ -114,6 +115,9 @@ dependencies {
     // Logging
     implementation Libs.slf4j_android_logger
     implementation Libs.kotlin_logging
+
+    // Multidex
+    implementation Libs.multidex
 
     // RxJava
     implementation Libs.rxjava2
