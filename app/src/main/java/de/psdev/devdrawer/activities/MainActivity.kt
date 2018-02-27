@@ -71,7 +71,7 @@ class MainActivity: AppCompatActivity(), TextWatcher {
         packagesFilterListView.adapter = filterListAdapter
         addPackageEditText.setAdapter(packageNameCompletionAdapter)
         addPackageEditText.addTextChangedListener(this)
-        addButton.setOnClickListener { view ->
+        addButton.setOnClickListener {
             val filter = addPackageEditText.text.toString()
             if (filter.isNotEmpty()) {
                 if (!filterListAdapter.data.map { it.filter }.contains(filter)) {

@@ -47,7 +47,7 @@ class EditDialog: Activity(), TextWatcher {
         editDialogEditText.addTextChangedListener(this)
 
         // Change button sends a result back to MainActivity
-        changeButton.setOnClickListener { view ->
+        changeButton.setOnClickListener {
             val intent = Intent().apply {
                 putExtra("id", id)
                 putExtra("newText", editDialogEditText.text.toString())

@@ -41,7 +41,7 @@ class FilterListAdapter(private val activity: Activity,
     override fun hasStableIds(): Boolean = true
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view = convertView ?: createView(position, parent)
+        val view = convertView ?: createView(parent)
         bindView(view, position)
         return view
     }
@@ -50,7 +50,7 @@ class FilterListAdapter(private val activity: Activity,
     // Private API
     // ==========================================================================================================================
 
-    private fun createView(position: Int, parent: ViewGroup): View {
+    private fun createView(parent: ViewGroup): View {
         return layoutInflater.inflate(R.layout.package_list_item, parent, false).apply {
             tag = FilterViewHolder(this)
         }

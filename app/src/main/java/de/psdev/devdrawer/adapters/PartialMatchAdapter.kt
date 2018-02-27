@@ -64,7 +64,7 @@ class PartialMatchAdapter(activity: Activity,
     override fun getItemId(position: Int): Long = filteredItems[position].hashCode().toLong()
 
     override fun getView(position: Int, convertView: View?, viewGroup: ViewGroup): View? {
-        val view = convertView ?: createView(position, viewGroup)
+        val view = convertView ?: createView(viewGroup)
         bindView(position, view)
         return view
     }
@@ -79,7 +79,7 @@ class PartialMatchAdapter(activity: Activity,
     // Private API
     // ==========================================================================================================================
 
-    private fun createView(position: Int, parent: ViewGroup): View {
+    private fun createView(parent: ViewGroup): View {
         return layoutInflater.inflate(R.layout.dropdown_list_item, parent, false).apply {
             tag = ViewHolder(this)
         }
