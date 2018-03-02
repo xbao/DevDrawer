@@ -4,35 +4,35 @@
 
     <PreferenceCategory android:title="Activity Launcher">
         <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="showActivityChoice"
+            android:defaultValue="@bool/pref_show_activity_choice_default"
+            android:key="@string/pref_show_activity_choice"
             android:title="Show activity choice on launch" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Launching Intents">
         <ListPreference
-            android:defaultValue="aosp"
-            android:entries="@array/launching_intents"
-            android:entryValues="@array/launching_intents_values"
-            android:key="launchingIntents"
+            android:defaultValue="@string/pref_launch_intents_default"
+            android:entries="@array/launch_intent_labels"
+            android:entryValues="@array/launch_intent_values"
+            android:key="@string/pref_launch_intents"
             android:title="Launching Intent" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Sorting">
         <ListPreference
             android:defaultValue="@string/pref_sort_order_default"
-            android:entries="@array/sorting_options"
-            android:entryValues="@array/sorting_options_values"
+            android:entries="@array/sort_order_labels"
+            android:entryValues="@array/sort_order_values"
             android:key="@string/pref_sort_order"
             android:title="Widget Sorting Options" />
 
     </PreferenceCategory>
     <PreferenceCategory android:title="Widget Theme">
         <ListPreference
-            android:defaultValue="Light"
+            android:defaultValue="@string/pref_theme_default"
             android:entries="@array/widget_themes"
             android:entryValues="@array/widget_themes"
-            android:key="theme"
+            android:key="@string/pref_theme"
             android:title="Theme" />
     </PreferenceCategory>
 

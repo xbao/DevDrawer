@@ -11,6 +11,7 @@ import android.preference.PreferenceManager
 import android.provider.Settings
 import android.widget.Toast
 import de.psdev.devdrawer.R
+import de.psdev.devdrawer.settings.SettingsActivity
 import de.psdev.devdrawer.utils.Constants
 import mu.KLogging
 
@@ -53,7 +54,7 @@ class ClickHandlingActivity: Activity() {
     }
 
     private fun startApp(activity: Activity, packageName: String) {
-        if (sharedPreferences.getBoolean("showActivityChoice", false)) {
+        if (sharedPreferences.getBoolean(getString(R.string.pref_show_activity_choice), resources.getBoolean(R.bool.pref_show_activity_choice_default))) {
             // Show the activity choice dialog
             val intent = ChooseActivityDialog.createStartIntent(activity, packageName).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -65,7 +66,8 @@ class ClickHandlingActivity: Activity() {
             try {
                 val intent = activity.packageManager.getLaunchIntentForPackage(packageName).apply {
                     addCategory(Intent.CATEGORY_LAUNCHER)
-                    flags = if (sharedPreferences.getString("launchingIntents", "aosp") == "aosp") {
+                    flags = if (sharedPreferences.getString(getString(R.string.pref_launch_intents), getString(R.string.pref_launch_intents_default)) ==
+                        getString(R.string.launch_intent_aosp)) {
                         Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
                     } else {
                         Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NO_HISTORY
@@ -74,7 +76,7 @@ class ClickHandlingActivity: Activity() {
                 activity.startActivity(intent)
             } catch (e: NullPointerException) {
                 Toast.makeText(activity, activity.getString(R.string.no_main_activity_could_be_found), Toast.LENGTH_SHORT).show()
-                val intent = Intent(activity, PrefActivity::class.java).apply {
+                val intent = Intent(activity, SettingsActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                 }
                 activity.startActivity(intent)

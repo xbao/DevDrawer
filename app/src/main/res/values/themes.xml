@@ -5,6 +5,11 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
+
+        <item name="preferenceTheme">@style/Theme.Purple.Settings.Preferences</item>
+
     </style>
+
+    <style name="Theme.Purple.Settings.Preferences" parent="@style/PreferenceThemeOverlay.v14.Material" />
 
 </resources>

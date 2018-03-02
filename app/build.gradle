@@ -100,6 +100,7 @@ dependencies {
 
     // Support Library
     implementation Libs.support_appcompat_v7
+    implementation Libs.support_preference_v7
 
     // Android Architecture Libraries
     implementation Libs.room_runtime

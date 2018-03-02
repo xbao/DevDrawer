@@ -18,6 +18,12 @@
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".settings.SettingsActivity"
+            android:label="@string/settings"
+            android:parentActivityName=".activities.MainActivity" />
+
         <activity
             android:name=".activities.ClickHandlingActivity"
             android:allowTaskReparenting="false"
@@ -29,8 +35,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activities.PrefActivity" />
 
         <activity
             android:name=".activities.EditDialog"

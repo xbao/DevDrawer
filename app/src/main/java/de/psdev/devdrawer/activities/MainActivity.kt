@@ -5,12 +5,12 @@ import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import de.psdev.devdrawer.BaseActivity
 import de.psdev.devdrawer.DevDrawerApplication
 import de.psdev.devdrawer.R
 import de.psdev.devdrawer.adapters.FilterListAdapter
@@ -19,6 +19,7 @@ import de.psdev.devdrawer.appwidget.DDWidgetProvider
 import de.psdev.devdrawer.database.PackageFilter
 import de.psdev.devdrawer.database.PackageFilterDao
 import de.psdev.devdrawer.receivers.UpdateReceiver
+import de.psdev.devdrawer.settings.SettingsActivity
 import de.psdev.devdrawer.utils.Constants
 import de.psdev.devdrawer.utils.consume
 import de.psdev.devdrawer.utils.getExistingPackages
@@ -30,7 +31,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.main.*
 import mu.KLogging
 
-class MainActivity: AppCompatActivity(), TextWatcher {
+class MainActivity: BaseActivity(), TextWatcher {
 
     companion object: KLogging() {
         @JvmStatic
@@ -133,7 +134,7 @@ class MainActivity: AppCompatActivity(), TextWatcher {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_settings -> consume { startActivity(Intent(this, PrefActivity::class.java)) }
+            R.id.action_settings -> consume { startActivity(Intent(this, SettingsActivity::class.java)) }
             R.id.action_info -> consume { TODO("Implement app info screen") }
             else -> super.onOptionsItemSelected(item)
         }
