@@ -9,7 +9,7 @@ object Versions {
     // Libs
     const val androidArchitectureComponents = "1.1.0-alpha2"
     const val androidSupportLib = "27.1.0"
-    const val androidKotlinExtensions = "0.1"
+    const val androidKotlinExtensions = "0.2"
     const val androidJob = "1.2.4"
     const val kotlinLogging = "1.5.3"
     const val leakCanary = "1.5.4"
@@ -47,6 +47,7 @@ object Libs {
 
     // Android Support Library
     val support_appcompat_v7 = "com.android.support:appcompat-v7:${Versions.androidSupportLib}"
+    val support_preference_v7 = "com.android.support:preference-v7:${Versions.androidSupportLib}"
 
     // Android Kotlin Extensions
     val android_ktx = "androidx.core:core-ktx:${Versions.androidKotlinExtensions}"
