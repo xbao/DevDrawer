@@ -28,10 +28,6 @@ android {
             all { ignoreFailures = true }
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
     final def keystorePropertiesFile = rootProject.file("release.properties")
     signingConfigs {
         debug {
