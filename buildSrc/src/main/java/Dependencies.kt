@@ -1,6 +1,6 @@
 object Versions {
     // General
-    const val kotlin = "1.2.21"
+    const val kotlin = "1.2.30"
 
     // Plugins
     const val androidGradle = "3.2.0-alpha04"
