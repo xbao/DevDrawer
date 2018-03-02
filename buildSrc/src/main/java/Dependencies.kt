@@ -7,7 +7,7 @@ object Versions {
     const val gradleVersions = "0.17.0"
 
     // Libs
-    const val androidArchitectureComponents = "1.1.0-alpha2"
+    const val androidArchitectureComponents = "1.1.0-alpha3"
     const val androidSupportLib = "27.1.0"
     const val androidKotlinExtensions = "0.2"
     const val androidJob = "1.2.4"
