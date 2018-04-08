@@ -1,29 +1,29 @@
 object Versions {
     // General
-    const val kotlin = "1.2.30"
+    const val kotlin = "1.2.31"
 
     // Plugins
-    const val androidGradle = "3.2.0-alpha04"
+    const val androidGradle = "3.2.0-alpha09"
     const val gradleVersions = "0.17.0"
 
     // Libs
-    const val androidArchitectureComponents = "1.1.0-alpha3"
-    const val androidSupportLib = "27.1.0"
-    const val androidKotlinExtensions = "0.2"
-    const val androidJob = "1.2.4"
-    const val kotlinLogging = "1.5.3"
+    const val androidArchitectureComponents = "1.1.0-beta2"
+    const val androidSupportLib = "27.1.1"
+    const val androidKotlinExtensions = "0.3"
+    const val androidJob = "1.2.5"
+    const val kotlinLogging = "1.5.4"
     const val leakCanary = "1.5.4"
     const val multidexVersion = "1.0.3"
-    const val rxjava2 = "2.1.10"
+    const val rxjava2 = "2.1.12"
     const val rxandroid = "2.0.2"
     const val rxkotlin = "2.2.0"
     const val slf4jAndroidLogger = "1.0.5"
 
     // Testing
     const val junit = "4.12"
-    const val robolectric = "3.7.1"
+    const val robolectric = "3.8"
     const val assertj = "3.9.1"
-    const val mockito = "2.15.0"
+    const val mockito = "2.18.0"
 }
 
 object Config {
