@@ -1,9 +1,9 @@
 object Versions {
     // General
-    const val kotlin = "1.2.31"
+    const val kotlin = "1.3.21"
 
     // Plugins
-    const val androidGradle = "3.2.0-alpha09"
+    const val androidGradle = "3.3.2"
     const val gradleVersions = "0.17.0"
 
     // Libs
@@ -30,7 +30,6 @@ object Config {
     const val min_sdk = 16
     const val target_sdk = 27
     const val compile_sdk = 27
-    const val build_tools = "27.0.3"
 }
 
 object Plugins {
