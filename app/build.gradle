@@ -112,7 +112,7 @@ dependencies {
     implementation Libs.kotlin_stdlib
 
     // LeakCanary
-    debugImplementation Libs.leak_canary
+    debugImplementation Libs.leak_canary_no_op // shhh
     releaseImplementation Libs.leak_canary_no_op
 
     // Logging
