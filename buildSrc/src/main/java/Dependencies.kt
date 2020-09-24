@@ -3,13 +3,11 @@ object Versions {
     const val kotlin = "1.3.21"
 
     // Plugins
-    const val androidGradle = "3.3.2"
-    const val gradleVersions = "0.17.0"
+    const val androidGradle = "3.6.4"
 
     // Libs
     const val androidArchitectureComponents = "1.1.0-beta2"
     const val androidSupportLib = "27.1.1"
-    const val androidKotlinExtensions = "0.3"
     const val androidJob = "1.2.5"
     const val kotlinLogging = "1.5.4"
     const val leakCanary = "1.5.4"
@@ -35,7 +33,6 @@ object Config {
 object Plugins {
     val android_gradle = "com.android.tools.build:gradle:${Versions.androidGradle}"
     val kotlin_gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
-    val versions_gradle = "com.github.ben-manes:gradle-versions-plugin:${Versions.gradleVersions}"
 }
 
 object Libs {
@@ -47,9 +44,6 @@ object Libs {
     // Android Support Library
     val support_appcompat_v7 = "com.android.support:appcompat-v7:${Versions.androidSupportLib}"
     val support_preference_v7 = "com.android.support:preference-v7:${Versions.androidSupportLib}"
-
-    // Android Kotlin Extensions
-    val android_ktx = "androidx.core:core-ktx:${Versions.androidKotlinExtensions}"
 
     // Android-Job
     val android_job = "com.evernote:android-job:${Versions.androidJob}"

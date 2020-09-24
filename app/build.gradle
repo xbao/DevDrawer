@@ -102,9 +102,6 @@ dependencies {
     implementation Libs.room_rxjava2
     kapt Libs.room_compiler
 
-    // Android Kotlin Extensions
-    implementation Libs.android_ktx
-
     // Android-Job
     implementation Libs.android_job
 

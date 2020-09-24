@@ -1,18 +1,49 @@
 package de.psdev.devdrawer.settings
 
+import android.annotation.SuppressLint
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v7.preference.ListPreference
 import android.support.v7.preference.Preference
 import android.support.v7.preference.PreferenceFragmentCompat
 import android.widget.Toast
-import androidx.core.content.edit
 import de.psdev.devdrawer.R
 import de.psdev.devdrawer.appwidget.DDWidgetProvider
 
-class SettingsFragment: PreferenceFragmentCompat() {
+/**
+ * Allows editing of this preference instance with a call to [apply][SharedPreferences.Editor.apply]
+ * or [commit][SharedPreferences.Editor.commit] to persist the changes.
+ * Default behaviour is [apply][SharedPreferences.Editor.apply].
+ * ```
+ * prefs.edit {
+ *     putString("key", value)
+ * }
+ * ```
+ * To [commit][SharedPreferences.Editor.commit] changes:
+ * ```
+ * prefs.edit(commit = true) {
+ *     putString("key", value)
+ * }
+ * ```
+ */
+@SuppressLint("ApplySharedPref")
+inline fun SharedPreferences.edit(
+        commit: Boolean = false,
+        action: SharedPreferences.Editor.() -> Unit
+) {
+    val editor = edit()
+    action(editor)
+    if (commit) {
+        editor.commit()
+    } else {
+        editor.apply()
+    }
+}
+
+class SettingsFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.preferences)
@@ -30,7 +61,7 @@ class SettingsFragment: PreferenceFragmentCompat() {
         }
 
         findPreference<ListPreference>(R.string.pref_sort_order).apply {
-            summary = sortOrderLabelFromValue(sharedPreferences.getString(getString(R.string.pref_sort_order), getString(R.string.pref_sort_order_default)))
+            summary = sortOrderLabelFromValue(sharedPreferences.getString(getString(R.string.pref_sort_order), getString(R.string.pref_sort_order_default))!!)
             setOnPreferenceChangeListener { preference, newValue ->
                 sharedPreferences.edit {
                     putString(preference.key, newValue.toString())
