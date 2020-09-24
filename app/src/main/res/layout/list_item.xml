@@ -1,19 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="8dp">
 
     <Button
         android:id="@+id/touchArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/imageView"
-        android:layout_toLeftOf="@+id/uninstallImageButton"
+        android:layout_alignBottom="@+id/appNameTextView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_toStartOf="@+id/uninstallImageButton"
+        android:layout_toLeftOf="@+id/uninstallImageButton"
         android:background="@drawable/listview_button_selector"
         android:text="" />
 
@@ -21,9 +21,11 @@
         android:id="@+id/imageView"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:importantForAccessibility="no"
+        android:scaleType="centerInside"
         android:src="@mipmap/ic_launcher" />
 
     <TextView
@@ -31,31 +33,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="4dp"
         android:layout_marginStart="4dp"
-        android:layout_toEndOf="@+id/imageView"
-        android:layout_toLeftOf="@+id/uninstallImageButton"
-        android:layout_toRightOf="@+id/imageView"
+        android:layout_marginLeft="4dp"
         android:layout_toStartOf="@+id/uninstallImageButton"
+        android:layout_toLeftOf="@+id/uninstallImageButton"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_toRightOf="@+id/imageView"
         android:ellipsize="end"
-        android:maxLines="1"
+        android:maxLines="2"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="@color/primary"
         android:textIsSelectable="false"
-        tools:text="de.psdev.devdrawer" />
+        tools:text="de.psdev.devdrawer.lorem.ipsum.cartum.flagellum" />
 
     <TextView
         android:id="@+id/appNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/imageView"
         android:layout_below="@+id/packageNameTextView"
-        android:layout_marginLeft="4dp"
         android:layout_marginStart="4dp"
-        android:layout_toEndOf="@+id/imageView"
-        android:layout_toLeftOf="@+id/uninstallImageButton"
-        android:layout_toRightOf="@+id/imageView"
+        android:layout_marginLeft="4dp"
         android:layout_toStartOf="@+id/uninstallImageButton"
+        android:layout_toLeftOf="@+id/uninstallImageButton"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_toRightOf="@+id/imageView"
         android:ellipsize="end"
         android:maxLines="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -66,10 +67,11 @@
         android:id="@+id/uninstallImageButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_alignBottom="@+id/imageView"
         android:layout_alignTop="@+id/imageView"
-        android:layout_toLeftOf="@+id/appDetailsImageButton"
+        android:layout_alignBottom="@+id/imageView"
         android:layout_toStartOf="@+id/appDetailsImageButton"
+        android:layout_toLeftOf="@+id/appDetailsImageButton"
+        android:contentDescription="@string/cdesc_uninstall"
         android:scaleType="centerInside"
         android:src="@drawable/delete_imageview" />
 
@@ -77,10 +79,11 @@
         android:id="@+id/appDetailsImageButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_alignTop="@+id/imageView"
         android:layout_alignBottom="@+id/imageView"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/imageView"
+        android:contentDescription="@string/cdesc_settings"
         android:scaleType="centerInside"
         android:src="@drawable/settings_imageview" />
 
